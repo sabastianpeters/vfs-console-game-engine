@@ -17,13 +17,20 @@ namespace Runesole
 		public static Player main;
 		
 		private const float walkSpeed = 10f;
-		private const float runSpeed = 20f;
 
-		public int health = 100;
+        public float experience = 0f;
+        public float maxExperience = 10f;
+        public int level;
 
 
-		void Start()
+        void Start()
 		{
+            level = 1;
+            health = 10;
+            maxHealth = 10;
+            attackDmg = 1;
+            moveSpeed = 1f;
+
 			if (main == null)
 				main = this; // if no main player, become the main one
 		}
@@ -64,9 +71,8 @@ namespace Runesole
 				}
 
 
-				float speed = Input.GetKey(Controls.run) ? runSpeed : walkSpeed;
-				x *= Time.deltaTime * speed;
-				y *= Time.deltaTime * speed;
+				x *= Time.deltaTime * walkSpeed;
+				y *= Time.deltaTime * walkSpeed;
 
 				position = new Vector2(position.x + x, position.y + y);
 			}
@@ -85,6 +91,25 @@ namespace Runesole
 			
 			Camera.main.position = position;
 		}
+
+        void AddExp (float gainedExperience)
+        {
+            experience += gainedExperience;
+            while ((experience) >= maxExperience) /// if the current exp and exp gained is equal to or greater then the max exp, level up
+            {
+                experience = experience - maxExperience;
+                LevelUp();
+                maxExperience = maxExperience * 1.1f;
+            }
+        }
+
+        void LevelUp ()
+        {
+            level++;
+            maxHealth += 2;
+            attackDmg += 1;
+            moveSpeed += 0.02f;
+        }
 		
 
 		void AttackRight ()

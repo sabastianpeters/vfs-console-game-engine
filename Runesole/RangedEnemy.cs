@@ -8,6 +8,9 @@ namespace Runesole
 {
     class RangedEnemy : LivingEntitiy
     {
+        const float rangeRangedAttack = 5f;
+        const float rangePlayerDetect = 10f;
+
         void Start()
         {
             sprite = SpriteManager.enemy_ranged;
