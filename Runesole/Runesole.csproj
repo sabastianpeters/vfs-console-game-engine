@@ -71,6 +71,8 @@
     <Compile Include="Engine\Input.cs" />
     <Compile Include="Engine\Mathf.cs" />
     <Compile Include="Engine\Utility\NativeFunctions.cs" />
+    <Compile Include="MeleeEnemy.cs" />
+    <Compile Include="RangedEnemy.cs" />
     <Compile Include="WorldBlock.cs" />
     <Compile Include="Engine\Program.cs" />
     <Compile Include="GameManager.cs" />

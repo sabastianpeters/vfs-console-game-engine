@@ -12,7 +12,7 @@ using Runesole.Engine;
 
 namespace Runesole
 {
-	class Player : GameObject
+	class Player : LivingEntitiy
 	{
 		public static Player main;
 		
