@@ -67,25 +67,46 @@ namespace Runesole.Engine
 		// Sets up console for use
 		public static void InitializeConsole()
 		{
-			/// gets a reference to console
-			IntPtr consoleHandle = GetStdHandle(-11);
-			uint outConsoleMode;
+			/// gets a reference to console output and input handles
+			IntPtr outputConsoleHandle = GetStdHandle((int)StdHandle.STD_OUTPUT_HANDLE);
+			IntPtr inputConsoleHandle = GetStdHandle((int)StdHandle.STD_INPUT_HANDLE);
+			uint outputConsoleMode, inputConsoleMode;
 
-			// tries to get the console mode
-			if (!GetConsoleMode(consoleHandle, out outConsoleMode))
+			// tries to get the output console mode
+			if (!GetConsoleMode(outputConsoleHandle, out outputConsoleMode))
 			{
 				Console.WriteLine("failed to get output console mode");
 				Console.ReadKey();
 				return;
 			}
 
+			// tries to get the output console mode
+			if (!GetConsoleMode(inputConsoleHandle, out inputConsoleMode))
+			{
+				Console.WriteLine("failed to get input console mode");
+				Console.ReadKey();
+				return;
+			}
+			
+			// Sets output & input console mode flags
+			outputConsoleMode |= ((uint)ConsoleMode.DISABLE_NEWLINE_AUTO_RETURN) | ((uint)ConsoleMode.ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+			inputConsoleMode &= ~((uint)ConsoleMode.ENABLE_QUICK_EDIT_MODE);
 
-			//outConsoleMode |= ((uint)ConsoleMode.ENABLE_EXTENDED_FLAGS) | ((uint)ConsoleMode.DISABLE_NEWLINE_AUTO_RETURN) | ((uint)ConsoleMode.ENABLE_VIRTUAL_TERMINAL_PROCESSING);
-			//outConsoleMode |= 0x0004 | 0x0008;
-			outConsoleMode |= ((uint)ConsoleMode.DISABLE_NEWLINE_AUTO_RETURN) | ((uint)ConsoleMode.ENABLE_VIRTUAL_TERMINAL_PROCESSING);
-			outConsoleMode &= ~((uint)ConsoleMode.ENABLE_QUICK_EDIT_MODE);
+			// Tries to set output console mode
+			if (!SetConsoleMode(outputConsoleHandle, outputConsoleMode))
+			{
+				Console.WriteLine("failed to set output console mode");
+				Console.ReadKey();
+				return;
+			}
 
-			SetConsoleMode(consoleHandle, outConsoleMode);
+			// Tries to set input console mode
+			if (!SetConsoleMode(inputConsoleHandle, inputConsoleMode))
+			{
+				Console.WriteLine("failed to set input console mode");
+				Console.ReadKey();
+				return;
+			}
 		}
 
 	}
