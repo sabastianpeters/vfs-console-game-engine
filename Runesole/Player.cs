@@ -37,60 +37,67 @@ namespace Runesole
 
 		void Update ()
 		{
-			float x = 0, y = 0;
+            sprite = SpriteManager.player_idle; /// by default draws base player
 
-			if(Input.GetKey(Controls.moveUp))
-			{
-				y++;
-			}
-			if (Input.GetKey(Controls.moveDown))
-			{
-				y--;
-			}
-			if (Input.GetKey(Controls.moveLeft))
-			{
-				x--;
-			}
-			if (Input.GetKey(Controls.moveRight))
-			{
-				x++;
-			}
-
-
-			if (x == 0 && y == 0)
-			{
-				position = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
-			}
-			else
-			{
-				// If going on a diagonal, normalize the vector (always same movement speed)
-				if((int)Mathf.Abs(x) == 0 && (int)Mathf.Abs(y) == 0)
-				{
-					x *= 0.707f;
-					y *= 0.707f;
-				}
-
-
-				x *= Time.deltaTime * walkSpeed;
-				y *= Time.deltaTime * walkSpeed;
-
-				position = new Vector2(position.x + x, position.y + y);
-			}
-
-
-			sprite = SpriteManager.player_idle; /// by default draws base player
-
-			if (Input.GetKeyDown(Controls.attackRight))
-				AttackRight();
-			if (Input.GetKeyDown(Controls.attackLeft))
-				AttackLeft();
-			if (Input.GetKeyDown(Controls.attackUp))
-				AttackUp();
-			if (Input.GetKeyDown(Controls.attackDown))
-				AttackDown();
-			
-			Camera.main.position = position;
+            DoMovement();
+            DoAttack();
+            Camera.main.position = position;
 		}
+
+        void DoAttack()
+        {
+            if (Input.GetKeyDown(Controls.attackRight))
+                AttackRight();
+            if (Input.GetKeyDown(Controls.attackLeft))
+                AttackLeft();
+            if (Input.GetKeyDown(Controls.attackUp))
+                AttackUp();
+            if (Input.GetKeyDown(Controls.attackDown))
+                AttackDown();
+        }
+
+        void DoMovement()
+        {
+            float x = 0, y = 0;
+
+            if (Input.GetKey(Controls.moveUp))
+            {
+                y++;
+            }
+            if (Input.GetKey(Controls.moveDown))
+            {
+                y--;
+            }
+            if (Input.GetKey(Controls.moveLeft))
+            {
+                x--;
+            }
+            if (Input.GetKey(Controls.moveRight))
+            {
+                x++;
+            }
+
+
+            if (x == 0 && y == 0)
+            {
+                position = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
+            }
+            else
+            {
+                // If going on a diagonal, normalize the vector (always same movement speed)
+                if ((int)Mathf.Abs(x) == 0 && (int)Mathf.Abs(y) == 0)
+                {
+                    x *= 0.707f;
+                    y *= 0.707f;
+                }
+
+
+                x *= Time.deltaTime * walkSpeed;
+                y *= Time.deltaTime * walkSpeed;
+
+                position = new Vector2(position.x + x, position.y + y);
+            }
+        }
 
         public void AddExp (float gainedExperience)
         {
