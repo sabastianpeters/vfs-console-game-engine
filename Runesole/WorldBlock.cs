@@ -17,6 +17,8 @@ namespace Runesole.Engine
 		public static WorldBlock stoneWall;
 		public static WorldBlock stone;
 		public static WorldBlock grass;
+        public static WorldBlock waterBlock;
+        public static WorldBlock water;
 
 		// Struct members
 		public bool isCollidable;
@@ -47,7 +49,17 @@ namespace Runesole.Engine
 				new Spit('▒', Color.Forground.LightGray, Color.Background.DarkGray)
 			);
 
-			stone = new WorldBlock(
+            waterBlock = new WorldBlock(
+                true,
+                new Spit('■', Color.Forground.None, Color.Background.Blue)
+            );
+
+            water = new WorldBlock(
+                false,
+                new Spit('■', Color.Forground.None, Color.Background.Cyan)
+            );
+
+            stone = new WorldBlock(
 				false,
 				new Spit(' ', Color.Background.DarkGray)
 			);

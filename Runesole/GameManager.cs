@@ -35,9 +35,14 @@ namespace Runesole
 
 			for(int i = 0; i < 100; i++)
 			{
-				Enemy enemy = new Enemy();
+                MeleeEnemy enemy1 = new MeleeEnemy();
 			}
-		}
+
+            for (int i = 0; i < 100; i++)
+            {
+                RangedEnemy enemy2 = new RangedEnemy();
+            }
+        }
 
 		/// Called at begining of each frame
 		public static void Update ()
