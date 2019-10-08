@@ -33,14 +33,18 @@ namespace Runesole
 			world.SetBlockAt(10, 10, WorldBlock.grass);
 			world.SetBlockAt(11, 10, WorldBlock.grass);
 
-			for(int i = 0; i < 100; i++)
+			for(int i = 0; i < 10; i++)
 			{
                 MeleeEnemy enemy1 = new MeleeEnemy();
+                enemy1.position = new Vector2(i* 2, 0);
+                enemy1.OnDeath += () => player.AddExp(2f);
 			}
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
                 RangedEnemy enemy2 = new RangedEnemy();
+                enemy2.position = new Vector2(i + 3, i * 3);
+                enemy2.OnDeath += () => player.AddExp(2f);
             }
         }
 

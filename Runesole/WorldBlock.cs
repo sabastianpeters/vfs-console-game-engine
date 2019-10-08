@@ -17,8 +17,8 @@ namespace Runesole.Engine
 		public static WorldBlock stoneWall;
 		public static WorldBlock stone;
 		public static WorldBlock grass;
-        public static WorldBlock waterBlock;
-        public static WorldBlock water;
+        public static WorldBlock waterBlock; // deep water cant walk on
+        public static WorldBlock water; // water player can walk on
 
 		// Struct members
 		public bool isCollidable;
