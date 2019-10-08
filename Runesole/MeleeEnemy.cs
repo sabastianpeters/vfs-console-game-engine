@@ -8,14 +8,29 @@ namespace Runesole
 {
     class MeleeEnemy : LivingEntitiy
     {
+        const float meleeMeleeAttack = 1f;
+        const float meleePlayerDetect = 10f;
+
         void Start()
         {
+            maxHealth = 10;
+            health = 10;
+            attackDmg = 1;
+
             sprite = SpriteManager.enemy_melee;
         }
 
         void Update()
         {
-            position += (Player.main.position - position) * 0.1f;
+            if (IsInRange(Player.main.position, meleeMeleeAttack))
+            {
+                // attack player
+            }
+            else if (IsInRange(Player.main.position, meleePlayerDetect))
+            {
+                // chase player
+                position += (Player.main.position - position) * 0.1f;
+            }
         }
     }
 }

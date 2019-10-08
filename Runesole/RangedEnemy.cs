@@ -8,14 +8,35 @@ namespace Runesole
 {
     class RangedEnemy : LivingEntitiy
     {
+        const float rangeRunaway = 5f;
+        const float rangeRangedAttack = 5f;
+        const float rangePlayerDetect = 10f;
+
         void Start()
         {
+            maxHealth = 5;
+            health = 5;
+            attackDmg = 2;
+
             sprite = SpriteManager.enemy_ranged;
         }
 
         void Update()
         {
-            position += (Player.main.position - position) * 0.05f;
+            if (IsInRange(Player.main.position, rangeRunaway))
+            {
+                // run away
+                position += (Player.main.position - position) * -0.05f;
+            }
+            else if (IsInRange(Player.main.position, rangeRangedAttack))
+            {
+                // attack player
+            }
+            else if (IsInRange(Player.main.position, rangePlayerDetect))
+            {
+                // chase player
+                position += (Player.main.position - position) * 0.05f;
+            }
         }
     }
 }
