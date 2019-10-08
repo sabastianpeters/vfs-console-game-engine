@@ -34,12 +34,7 @@ namespace Runesole.Engine.Graphics
 		{
 			Console.CursorVisible = false; /// prevents users from seeing cursor drawing
 
-			// ensures window doesn't become larger than the maximum buffer
-			Console.SetWindowSize(130, 50);
-			Console.SetBufferSize(130, 50);
-
-			Width = Console.WindowWidth - 2;
-			Height = Console.WindowHeight - 2;
+			_UpdateSize ();
 
 			// Initializes array of rows
 			buffer = new char[Height][];
@@ -127,6 +122,31 @@ namespace Runesole.Engine.Graphics
 
 			stream.Flush();
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+		private static void _UpdateSize ()
+		{
+			// ensures window doesn't become larger than the maximum buffer
+			Console.SetWindowSize(130, 50);
+			Console.SetBufferSize(130, 50);
+
+			Width = Console.WindowWidth - 2;
+			Height = Console.WindowHeight - 2;
+		}
+
+
+
+
 		
 		public static void Init()
 		{
@@ -136,7 +156,7 @@ namespace Runesole.Engine.Graphics
 			//Console.OutputEncoding = Encoding.GetEncoding(28591);
 			Console.OutputEncoding = Encoding.UTF8;
 
-
+			_UpdateSize();
 			string stylePrefix = $"\u001b[{(int)borderBG};{(int)borderFG}m";
 			borderString = stylePrefix + borderChar;
 			borderRow = stylePrefix + new String(borderChar, Console.BufferWidth);
