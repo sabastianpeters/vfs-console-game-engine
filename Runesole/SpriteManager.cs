@@ -30,35 +30,35 @@ namespace Runesole
 		{
 			// Player Sprites
 			player_idle = new Sprite(1, 1);
-			player_idle.SetSpit(0, 0, new Spit('■', Color.Forground.Blue)); /// head
+			player_idle.SetSpit(0, 0, new Spit(' ', Color.Background.Blue)); /// head
 
 			player_attack_right = new Sprite(3, 1);
-			player_attack_right.SetSpit(0, 0, new Spit('■', Color.Forground.Blue)); /// head
+			player_attack_right.SetSpit(0, 0, new Spit(' ', Color.Background.Blue)); /// head
 			player_attack_right.SetSpit(1, 0, new Spit('═', Color.Forground.BrightRed));
 			player_attack_right.SetSpit(2, 0, new Spit('═', Color.Forground.BrightRed));
 
 			player_attack_left = new Sprite(3, 1, new Coord(2, 0));
-			player_attack_left.SetSpit(2, 0, new Spit('■', Color.Forground.Blue)); /// head
+			player_attack_left.SetSpit(2, 0, new Spit(' ', Color.Background.Blue)); /// head
 			player_attack_left.SetSpit(1, 0, new Spit('═', Color.Forground.BrightRed));
 			player_attack_left.SetSpit(0, 0, new Spit('═', Color.Forground.BrightRed));
 
 			player_attack_up = new Sprite(1, 2, new Coord(0, 1));
-			player_attack_up.SetSpit(0, 1, new Spit('■', Color.Forground.Blue)); /// head
+			player_attack_up.SetSpit(0, 1, new Spit(' ', Color.Background.Blue)); /// head
 			player_attack_up.SetSpit(0, 0, new Spit('║', Color.Forground.BrightRed)); /// attack
 
 			player_attack_down = new Sprite(1, 2);
-			player_attack_down.SetSpit(0, 0, new Spit('■', Color.Forground.Blue)); /// head
+			player_attack_down.SetSpit(0, 0, new Spit(' ', Color.Background.Blue)); /// head
 			player_attack_down.SetSpit(0, 1, new Spit('║', Color.Forground.BrightRed)); /// attack
 
 
 
 			// Melee Enemy Sprites
 			enemy_melee = new Sprite(1, 1);
-			enemy_melee.SetSpit(0, 0, new Spit('■', Color.Forground.Red)); /// head
+			enemy_melee.SetSpit(0, 0, new Spit(' ', Color.Background.Red)); /// head
 
             // Ranged Enemy Sprites
             enemy_ranged = new Sprite(1, 1);
-            enemy_ranged.SetSpit(0, 0, new Spit('■', Color.Forground.Magenta)); /// head
+            enemy_ranged.SetSpit(0, 0, new Spit(' ', Color.Background.Magenta)); /// head
 
         }
     }

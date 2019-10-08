@@ -8,6 +8,8 @@ namespace Runesole
 {
     class MeleeEnemy : LivingEntitiy
     {
+        const float meleePlayerDetect = 10f;
+
         void Start()
         {
             sprite = SpriteManager.enemy_melee;

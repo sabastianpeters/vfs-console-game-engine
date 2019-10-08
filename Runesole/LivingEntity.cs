@@ -10,7 +10,8 @@ namespace Runesole
 	{
         public int health;
         public int maxHealth;
-
+        public int attackDmg;
+        public float moveSpeed;
 
         public void Attack(LivingEntitiy entity)
         {
