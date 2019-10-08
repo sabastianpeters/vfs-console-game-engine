@@ -28,7 +28,7 @@ namespace Runesole
             level = 1;
             health = 10;
             maxHealth = 10;
-            attackDmg = 1;
+            attackDmg = 2;
             moveSpeed = 1f;
 
 			if (main == null)
@@ -92,7 +92,7 @@ namespace Runesole
 			Camera.main.position = position;
 		}
 
-        void AddExp (float gainedExperience)
+        public void AddExp (float gainedExperience)
         {
             experience += gainedExperience;
             while ((experience) >= maxExperience) /// if the current exp and exp gained is equal to or greater then the max exp, level up
@@ -128,5 +128,11 @@ namespace Runesole
 		{
 			sprite = SpriteManager.player_attack_down;
 		}
-	}
+        void AttackAll()
+        {
+
+        }
+
+
+    }
 }

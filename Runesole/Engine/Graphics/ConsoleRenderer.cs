@@ -107,7 +107,7 @@ namespace Runesole.Engine.Graphics
 					rowOutput.Append((int)fgColorbuffer[row][col]);
 					rowOutput.Append("m");
 					rowOutput.Append(buffer[row][col]); /// draws the characters with specified fg and bg color
-				}
+                }
 
 
 				rowOutput.Append(borderString); /// draws right border
