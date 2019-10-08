@@ -114,25 +114,19 @@ namespace Runesole
 
 		void AttackRight ()
 		{
-			sprite = SpriteManager.player_attack_right;
+			sprite = SpriteManager.player_attack_all;
 		}
 		void AttackLeft()
 		{
-			sprite = SpriteManager.player_attack_left;
+			sprite = SpriteManager.player_attack_all;
 		}
 		void AttackUp()
 		{
-			sprite = SpriteManager.player_attack_up;
+			sprite = SpriteManager.player_attack_all;
 		}
 		void AttackDown()
 		{
-			sprite = SpriteManager.player_attack_down;
+			sprite = SpriteManager.player_attack_all;
 		}
-        void AttackAll()
-        {
-
-        }
-
-
     }
 }
