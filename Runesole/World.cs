@@ -59,36 +59,17 @@ namespace Runesole
 		}
 
 
-		public void Rect(int x, int y, int width, int height, WorldBlock fill, WorldBlock wall)
-		{
-
-			int drawX = x, drawY = y;
-
-			/// sets top and bottom rows
-			for (drawX = x; drawX < width; drawX++)
-			{
-				SetBlockAt(drawX, 0, wall);
-				SetBlockAt(drawX, height-1, wall);
-			}
-
-
-			for (drawY = y+1; drawY < height-1; drawY++)
-			{
-				drawX = x;
-				SetBlockAt(drawX++, drawY, wall); /// left wall
-				SetBlockAt(drawX++, drawY, wall); /// left wall
-
-				while (drawX < width-2)
-				{
-					SetBlockAt(drawX++, drawY, fill); // center fill
-				}
-
-				SetBlockAt(drawX++, drawY, wall); /// right wall
-				SetBlockAt(drawX++, drawY, wall); /// right wall
-			}
-			
-		}
-
+        public void Rect(int x, int y, int width, int height, WorldBlock fill)
+        {
+            for (int drawX = x; drawX < width; drawX++)
+            {
+                for (int drawY = y; drawY < height; drawY++)
+                {
+                    SetBlockAt(drawX, drawY, fill);
+                }
+            }
+        }
+        
 
 		public WorldBlock GetBlockAt(int x, int y)
 		{
@@ -123,7 +104,14 @@ namespace Runesole
 				}
 			}
 
-			blockGrid[0][0]  = new WorldBlock(false, new Spit('X', Color.Background.Red));
+            Rect(0, 0, width, height, WorldBlock.deepWaterBlock);
+            Rect(3, 3, width - 3, height - 3, WorldBlock.waterBlock);
+            Rect(7, 7, width - 7, height - 7, WorldBlock.water);
+            Rect(10, 10, width - 10, height - 10, WorldBlock.sand);
+            Rect(15, 15, width - 15, height - 15, WorldBlock.cutGrass);
+            Rect(22, 22, width - 22, height - 22, WorldBlock.grass);
+
+            blockGrid[0][0]  = new WorldBlock(false, new Spit('X', Color.Background.Red));
 		}
 	}
 }
