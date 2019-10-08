@@ -71,6 +71,7 @@
     <Compile Include="Engine\Input.cs" />
     <Compile Include="Engine\Mathf.cs" />
     <Compile Include="Engine\Utility\NativeFunctions.cs" />
+    <Compile Include="LivingEntity.cs" />
     <Compile Include="MeleeEnemy.cs" />
     <Compile Include="RangedEnemy.cs" />
     <Compile Include="WorldBlock.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="Engine\Graphics\Sprite.cs" />
     <Compile Include="SpriteManager.cs" />
     <Compile Include="Engine\Time.cs" />
-    <Compile Include="Engine\Graphics\UI.cs" />
+    <Compile Include="Engine\UI.cs" />
     <Compile Include="Engine\Vectors.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>
