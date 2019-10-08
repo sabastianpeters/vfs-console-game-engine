@@ -56,6 +56,19 @@ namespace Runesole.Engine
 			this.y = y;
 		}
 
+		// Squared distance between 2 vectors (faster than Distance())
+		public static float SqrDistance(Vector2 v1, Vector2 v2)
+		{
+			float dx = v2.x - v1.x;
+			float dy = v2.y - v1.y;
+			return dx * dx + dy * dy;
+		}
+
+		// Distance between 2 vectors
+		public static float Distance (Vector2 v1, Vector2 v2)
+		{
+			return Mathf.Sqrt(SqrDistance(v1, v2));
+		}
 
 
 		public static Vector2 operator +(Vector2 v1, Vector2 v2)

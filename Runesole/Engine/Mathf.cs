@@ -66,5 +66,10 @@ namespace Runesole.Engine
 			return 1;
 		}
 
+		// Sqaure root
+		public static float Sqrt (float f)
+		{ 
+			return (float)Math.Sqrt((double) f); // very inefficient way of doing it, but easiest for me to implement
+		}
 	}
 }
