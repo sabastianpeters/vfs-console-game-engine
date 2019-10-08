@@ -22,10 +22,11 @@ namespace Runesole
 		public static Sprite player_attack_down;
 
 		// Enemy Sprites
-		public static Sprite enemy;
+		public static Sprite enemy_ranged;
+        public static Sprite enemy_melee;
 
-		// Create all sprites
-		public static void GenerateSprites ()
+        // Create all sprites
+        public static void GenerateSprites ()
 		{
 			// Player Sprites
 			player_idle = new Sprite(1, 1);
@@ -51,10 +52,14 @@ namespace Runesole
 
 
 
-			// Enemy Sprites
-			enemy = new Sprite(1, 1);
-			enemy.SetSpit(0, 0, new Spit('■', Color.Forground.Red)); /// head
+			// Melee Enemy Sprites
+			enemy_melee = new Sprite(1, 1);
+			enemy_melee.SetSpit(0, 0, new Spit('■', Color.Forground.Red)); /// head
 
-		}
-	}
+            // Ranged Enemy Sprites
+            enemy_ranged = new Sprite(1, 1);
+            enemy_ranged.SetSpit(0, 0, new Spit('■', Color.Forground.Magenta)); /// head
+
+        }
+    }
 }
