@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Runesole
 {
-    class MeleeEnemy : LivingEntitiy
+    class MeleeEnemy : Enemy
     {
         const float meleeMeleeAttack = 1f;
         const float meleePlayerDetect = 10f;

@@ -60,6 +60,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enemy.cs" />
     <Compile Include="Engine\Bounds.cs" />
     <Compile Include="Engine\Camera.cs" />
     <Compile Include="Controls.cs" />
