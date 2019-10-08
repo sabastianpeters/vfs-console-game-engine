@@ -28,7 +28,7 @@ namespace Runesole
 			player = new Player();
 			camera = new Camera();
 
-			player.position = Vector2.one * 10;
+			player.position = new Vector2(80,40);
 
 			world.SetBlockAt(10, 10, WorldBlock.grass);
 			world.SetBlockAt(11, 10, WorldBlock.grass);
