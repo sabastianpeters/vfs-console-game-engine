@@ -15,9 +15,9 @@ namespace Runesole
 
         void Start()
         {
-            maxHealth = 5f;
-            health = 5f;
-            attackDmg = 2f;
+            maxHealth = 5;
+            health = 5;
+            attackDmg = 2;
 
             sprite = SpriteManager.enemy_ranged;
         }
@@ -39,7 +39,6 @@ namespace Runesole
                 // chase player
                 position += (Player.main.position - position) * 1.5f * Time.deltaTime;
             }
-            TakeDamage(Time.deltaTime * 1f);
         }
     }
 }

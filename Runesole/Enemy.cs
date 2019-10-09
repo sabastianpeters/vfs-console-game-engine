@@ -8,6 +8,6 @@ namespace Runesole
 {
     class Enemy : LivingEntitiy
     {
-        
+
     }
 }
