@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Runesole.Engine;
 
 namespace Runesole
 {
@@ -26,7 +27,7 @@ namespace Runesole
             if (IsInRange(Player.main.position, rangeRunaway))
             {
                 // run away
-                position += (Player.main.position - position) * -0.07f;
+                position += (Player.main.position - position) * -1.5f * Time.deltaTime;
             }
             else if (IsInRange(Player.main.position, rangeRangedAttack))
             {
@@ -36,7 +37,7 @@ namespace Runesole
             else if (IsInRange(Player.main.position, rangePlayerDetect))
             {
                 // chase player
-                position += (Player.main.position - position) * 0.07f;
+                position += (Player.main.position - position) * 1.5f * Time.deltaTime;
             }
         }
     }
