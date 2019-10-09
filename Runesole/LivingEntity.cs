@@ -32,7 +32,7 @@ namespace Runesole
             if(health < 1f)
             {
                 OnDeath();
-                //this.Destory();
+                this.Destroy();
             }
         }
 
