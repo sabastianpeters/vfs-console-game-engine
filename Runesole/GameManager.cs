@@ -36,7 +36,7 @@ namespace Runesole
 			for(int i = 0; i < 10; i++)
 			{
                 MeleeEnemy enemy1 = new MeleeEnemy();
-                enemy1.position = new Vector2(i* 2, 0);
+                enemy1.position = new Vector2(0, 0);
                 enemy1.OnDeath += () => player.AddExp(2f);
 			}
 
@@ -52,6 +52,7 @@ namespace Runesole
 		public static void Update ()
 		{
 			Debug.Draw();
+            PlayerUI.Draw(player);
 		}
 
 		/// Called at end of each frame

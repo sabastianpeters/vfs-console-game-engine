@@ -74,6 +74,7 @@
     <Compile Include="Engine\Utility\NativeFunctions.cs" />
     <Compile Include="LivingEntity.cs" />
     <Compile Include="MeleeEnemy.cs" />
+    <Compile Include="PlayerUI.cs" />
     <Compile Include="RangedEnemy.cs" />
     <Compile Include="WorldBlock.cs" />
     <Compile Include="Engine\Program.cs" />
