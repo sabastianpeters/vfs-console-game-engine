@@ -22,13 +22,20 @@ namespace Runesole
 		public Sprite sprite;
 
 		public static List<GameObject> gameObjectList = new List<GameObject>();
-		public static List<Action> startEvent = new List<Action>();
-		public static List<Action> updateEvent = new List<Action>();
+		
+		private Action start;
+		private Action update;
 
-		public static void CallEvent (List<Action> listeners)
+		public static void CallStartEvent ()
 		{
-			foreach(Action action in listeners)
-				action();
+			foreach(GameObject gameObject in gameObjectList)
+				gameObject.start();
+		}
+
+		public static void CallUpdateEvent()
+		{
+			foreach (GameObject gameObject in gameObjectList)
+				gameObject.update();
 		}
 
 		public static void DrawGameObjects (Camera camera)
@@ -40,7 +47,6 @@ namespace Runesole
 			}
 		}
 
-		
 		/// Protected constructor (prevents external classes from creating gameobjects, but child classes can still be created)
 		protected GameObject ()
 		{
@@ -48,22 +54,37 @@ namespace Runesole
 			sprite = new Sprite(0, 0);
 
 			// Registers events
-			_RegisterEvent("Start", ref startEvent);
-			_RegisterEvent("Update", ref updateEvent);
+			start = _RegisterEvent("Start");
+			update = _RegisterEvent("Update");
 
 			// adds new game object to gameobject list
 			gameObjectList.Add(this);
 		}
 
-		private void _RegisterEvent (string methodName, ref List<Action> eventListeners)
+		private Action _RegisterEvent (string methodName)
 		{
 			// Tries to get a method with the given name, exits if not found
 			MethodInfo method = GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 			if (method == null)
-				return;
+				return DoNothing;
 
 			/// delegate use to speed up reflection came from: https://blogs.msmvps.com/jonskeet/2008/08/09/making-reflection-fly-and-exploring-delegates/
-			eventListeners.Add((Action)Delegate.CreateDelegate(typeof(Action), this, method)); 
+			return (Action)Delegate.CreateDelegate(typeof(Action), this, method); 
 		}
+
+		// An empty method that's called when an event doesn't exist in a gameobject
+		private void DoNothing () {}
+
+
+
+
+
+
+		// Destory the gameobject
+		public void Destroy ()
+		{
+			gameObjectList.Remove(this); /// removes the gameobject from the list, so its not drawn or updated
+		}
+
 	}
 }

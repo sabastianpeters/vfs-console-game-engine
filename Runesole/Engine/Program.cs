@@ -47,7 +47,7 @@ namespace Runesole.Engine
 			SpriteManager.GenerateSprites();	/// generates sprites
 			WorldBlock.Init();					/// generates world blocks
 			GameManager.Start();				/// starts the game logic
-			GameObject.CallEvent(GameObject.startEvent); /// calls start event on all gameobjects
+			GameObject.CallStartEvent();		/// calls start event on all gameobjects
 			Console.Clear();					/// clears the screen once everything is loaded
 
 			while (true)
@@ -58,7 +58,7 @@ namespace Runesole.Engine
 				ConsoleRenderer.Update();
 
 				// core game
-				GameObject.CallEvent(GameObject.updateEvent);	/// Preforms game logic on gameobjects
+				GameObject.CallUpdateEvent();					/// Preforms game logic on gameobjects
 				GameManager.Update();                           /// updates game logic
 				GameManager.camera.Update();					///	updates camera
 				GameManager.world.Draw(GameManager.camera);		/// draws the world
