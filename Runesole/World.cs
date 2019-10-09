@@ -75,7 +75,7 @@ namespace Runesole
 		{
 			if (0 <= x && x < width && 0 <= y && y < height)
 				return blockGrid[x][y];
-			return WorldBlock.empty;
+			return WorldBlock.deepWaterBlock;
 		}
 
 		public void SetBlockAt(int x, int y, WorldBlock block)

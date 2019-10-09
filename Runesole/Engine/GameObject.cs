@@ -33,8 +33,11 @@ namespace Runesole
 
 		public static void DrawGameObjects (Camera camera)
 		{
-			foreach (GameObject gameObject in gameObjectList)
+			for(int i = gameObjectList.Count-1; 0 <= i; i--)
+			{
+				GameObject gameObject = gameObjectList[i];
 				Camera.main.Draw(gameObject.position.x, gameObject.position.y, gameObject.sprite);
+			}
 		}
 
 		
