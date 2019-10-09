@@ -40,14 +40,7 @@ namespace Runesole
             DoMovement();
             DoAttack();
             Camera.main.position = position;
-            RegenHealth();
-
-        }
-
-        public void RegenHealth()
-        {
-            Heal(Time.deltaTime * 1f);
-        }
+		}
 
         void DoAttack()
         {
@@ -116,7 +109,6 @@ namespace Runesole
         {
             level++;
             maxHealth += 2;
-            //health = maxHealth;
             attackDmg += 1;
             base.moveSpeed += 0.02f;
         }

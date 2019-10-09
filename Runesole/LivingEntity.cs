@@ -9,9 +9,9 @@ namespace Runesole
 {
 	class LivingEntitiy : GameObject
 	{
-        public float health;
-        public float maxHealth;
-        public float attackDmg;
+        public int health;
+        public int maxHealth;
+        public int attackDmg;
         public float moveSpeed;
 
         public event Action OnDeath;
@@ -23,26 +23,17 @@ namespace Runesole
 
         public void ResetHealth()
         {
-            health = maxHealth;
+
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
-            health -= damage;
-            if(health < 1f)
-            {
-                OnDeath();
-                //this.Destory();
-            }
+
         }
 
-        public void Heal(float hp)
+        public void Heal(int hp)
         {
-            health += hp;
-            if(health > maxHealth)
-            {
-                health = maxHealth;
-            }
+
         }
 
         public bool IsInRange(Vector2 v, float range)
