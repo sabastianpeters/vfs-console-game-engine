@@ -60,9 +60,6 @@ namespace Runesole
 		}
 
 
-        ///hahaha
-
-
 
 		/// Protected constructor (prevents external classes from creating gameobjects, but child classes can still be created)
 		protected GameObject ()
