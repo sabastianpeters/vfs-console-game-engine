@@ -22,14 +22,14 @@ namespace Runesole
 
             UI.String(
                 Coord.TopLeft + Coord.Down + Coord.Down + Coord.Right *2, 
-                "Health: " + player.health + " / " + player.maxHealth, /// TODO make green, background black
+                "Health: " + Mathf.FloorToInt(player.health) + " / " + Mathf.FloorToInt(player.maxHealth), /// TODO make green, background black
                 Color.Forground.Green,
                 Color.Background.Black
             );
 
             UI.String(
                 Coord.TopLeft + Coord.Down + Coord.Down + Coord.Down + Coord.Right * 2, 
-                "Exp: " + player.experience + " / " + player.maxExperience, ///TODO make yellow, background black
+                "Exp: " + Mathf.FloorToInt(player.experience) + " / " + Mathf.CeilToInt(player.maxExperience), ///TODO make yellow, background black
                 Color.Forground.Yellow,
                 Color.Background.Black
             );
