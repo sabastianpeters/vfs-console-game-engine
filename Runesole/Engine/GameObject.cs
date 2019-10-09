@@ -22,23 +22,25 @@ namespace Runesole
 		public Sprite sprite;
 
 		public static List<GameObject> gameObjectList = new List<GameObject>();
+
+		private static List<GameObject> destroyGameObjectList = new List<GameObject>();
 		
 		private Action start;
 		private Action update;
 
-		public static void CallStartEvent ()
+		public static void __CallStartEvent ()
 		{
 			foreach(GameObject gameObject in gameObjectList)
 				gameObject.start();
 		}
 
-		public static void CallUpdateEvent()
+		public static void __CallUpdateEvent()
 		{
 			foreach (GameObject gameObject in gameObjectList)
 				gameObject.update();
 		}
 
-		public static void DrawGameObjects (Camera camera)
+		public static void __DrawGameObjects (Camera camera)
 		{
 			for(int i = gameObjectList.Count-1; 0 <= i; i--)
 			{
@@ -47,6 +49,21 @@ namespace Runesole
 			}
 		}
 
+		public static void __DestroyGameObjects ()
+		{
+			/// while there are objects to destory, destroy them
+			while (destroyGameObjectList.Count > 0)
+			{
+				gameObjectList.Remove(destroyGameObjectList[0]); /// removes the gameobject from the list, so its not drawn or updated
+				destroyGameObjectList.RemoveAt(0);
+			}
+		}
+
+
+
+
+
+
 		/// Protected constructor (prevents external classes from creating gameobjects, but child classes can still be created)
 		protected GameObject ()
 		{
@@ -54,22 +71,25 @@ namespace Runesole
 			sprite = new Sprite(0, 0);
 
 			// Registers events
-			start = _RegisterEvent("Start");
-			update = _RegisterEvent("Update");
+			_GetEvent("Start", out start);
+			_GetEvent("Update", out update);
 
 			// adds new game object to gameobject list
 			gameObjectList.Add(this);
 		}
 
-		private Action _RegisterEvent (string methodName)
+		private void _GetEvent (string methodName, out Action action)
 		{
 			// Tries to get a method with the given name, exits if not found
 			MethodInfo method = GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 			if (method == null)
-				return DoNothing;
+			{
+				action = DoNothing;
+				return;
+			}
 
 			/// delegate use to speed up reflection came from: https://blogs.msmvps.com/jonskeet/2008/08/09/making-reflection-fly-and-exploring-delegates/
-			return (Action)Delegate.CreateDelegate(typeof(Action), this, method); 
+			action = (Action)Delegate.CreateDelegate(typeof(Action), this, method); 
 		}
 
 		// An empty method that's called when an event doesn't exist in a gameobject
@@ -83,7 +103,7 @@ namespace Runesole
 		// Destory the gameobject
 		public void Destroy ()
 		{
-			gameObjectList.Remove(this); /// removes the gameobject from the list, so its not drawn or updated
+			destroyGameObjectList.Add(this); /// adds to a list to be destroyed
 		}
 
 	}

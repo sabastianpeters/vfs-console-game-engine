@@ -43,6 +43,10 @@ namespace Runesole.Engine.Graphics
 
 		private static void _drawString(Coord pos, string s, Color.Forground fg, Color.Background bg)
 		{
+			// Exits if y is out of range
+			if(!(0 <= pos.y && pos.y < ConsoleRenderer.Height))
+				return;
+
 			int x = pos.x;
 			foreach (char c in s)
 			{
