@@ -88,8 +88,7 @@ namespace Runesole.Engine.Graphics
 		public static void Render()
 		{
 			Console.SetCursorPosition(0, 0); /// draws from top-left
-			Console.Write(borderRow); /// draws top border
-
+			Console.WriteLine(borderRow); /// draws top border
 
 			StringBuilder rowOutput = new StringBuilder(); // output of each row
 
@@ -141,6 +140,12 @@ namespace Runesole.Engine.Graphics
 
 			Width = Console.WindowWidth - 2;
 			Height = Console.WindowHeight - 2;
+
+			// prevents height or width from being negative
+			if(Height < 0)
+				Height = 0;
+			if(Width < 0)
+				Width = 0;
 
 			// update border string
 			string stylePrefix = $"\u001b[{(int)borderBG};{(int)borderFG}m";

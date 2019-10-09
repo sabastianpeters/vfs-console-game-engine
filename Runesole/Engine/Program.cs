@@ -50,6 +50,7 @@ namespace Runesole.Engine
 			GameObject.__CallStartEvent();		/// calls start event on all gameobjects
 			Console.Clear();					/// clears the screen once everything is loaded
 
+			// while loop for each frame
 			while (true)
 			{
 				// updates engine classes
@@ -62,7 +63,7 @@ namespace Runesole.Engine
 				GameManager.Update();                           /// updates game logic
 				GameManager.camera.Update();					///	updates camera
 				GameManager.world.Draw(GameManager.camera);		/// draws the world
-				GameObject.DrawGameObjects(GameManager.camera);	/// draws game objects
+				GameObject.__DrawGameObjects(GameManager.camera);	/// draws game objects
 				UI.Draw();										///	draws UI
 				ConsoleRenderer.Render();						/// renders everything (UI & world) to console
 
@@ -70,6 +71,9 @@ namespace Runesole.Engine
 				GameManager.LateUpdate();
 				Input.LateUpdate();
 				Time.LateUpdate();
+
+				// Destroys any gameobjects at end of frame
+				GameObject.__DestroyGameObjects();
 			}
 
 		}

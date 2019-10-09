@@ -38,16 +38,9 @@ namespace Runesole
 		{
 			foreach (GameObject gameObject in gameObjectList)
 				gameObject.update();
-			
-			/// while there are objects to destory, destroy them
-			while(destroyGameObjectList.Count > 0)
-			{
-				destroyGameObjectList[0].Destroy();
-				destroyGameObjectList.RemoveAt(0);
-			}
 		}
 
-		public static void DrawGameObjects (Camera camera)
+		public static void __DrawGameObjects (Camera camera)
 		{
 			for(int i = gameObjectList.Count-1; 0 <= i; i--)
 			{
@@ -55,6 +48,21 @@ namespace Runesole
 				Camera.main.Draw(gameObject.position.x, gameObject.position.y, gameObject.sprite);
 			}
 		}
+
+		public static void __DestroyGameObjects ()
+		{
+			/// while there are objects to destory, destroy them
+			while (destroyGameObjectList.Count > 0)
+			{
+				gameObjectList.Remove(destroyGameObjectList[0]); /// removes the gameobject from the list, so its not drawn or updated
+				destroyGameObjectList.RemoveAt(0);
+			}
+		}
+
+
+
+
+
 
 		/// Protected constructor (prevents external classes from creating gameobjects, but child classes can still be created)
 		protected GameObject ()
@@ -95,7 +103,7 @@ namespace Runesole
 		// Destory the gameobject
 		public void Destroy ()
 		{
-			gameObjectList.Remove(this); /// removes the gameobject from the list, so its not drawn or updated
+			destroyGameObjectList.Add(this); /// adds to a list to be destroyed
 		}
 
 	}
