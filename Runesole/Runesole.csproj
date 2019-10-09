@@ -67,6 +67,7 @@
     <Compile Include="Engine\Debug.cs" />
     <Compile Include="Engine\Graphics\Coord.cs" />
     <Compile Include="Engine\Graphics\Colors.cs" />
+    <Compile Include="Engine\Random.cs" />
     <Compile Include="Engine\Utility\FramerateCounter.cs" />
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\Input.cs" />

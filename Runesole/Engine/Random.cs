@@ -20,5 +20,10 @@ namespace Runesole.Engine
 		{
 			return _rand.Next(min, max);
 		}
+
+        public static void Init()
+        {
+            _rand = new System.Random();
+        }
 	}
 }
