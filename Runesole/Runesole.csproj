@@ -67,6 +67,7 @@
     <Compile Include="Engine\Debug.cs" />
     <Compile Include="Engine\Graphics\Coord.cs" />
     <Compile Include="Engine\Graphics\Colors.cs" />
+    <Compile Include="Engine\Random.cs" />
     <Compile Include="Engine\Utility\FramerateCounter.cs" />
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\Input.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Engine\Utility\NativeFunctions.cs" />
     <Compile Include="LivingEntity.cs" />
     <Compile Include="MeleeEnemy.cs" />
+    <Compile Include="PlayerUI.cs" />
     <Compile Include="RangedEnemy.cs" />
     <Compile Include="WorldBlock.cs" />
     <Compile Include="Engine\Program.cs" />

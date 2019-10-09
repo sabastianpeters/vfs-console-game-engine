@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Runesole.Engine;
 
 namespace Runesole
 {
@@ -29,7 +30,7 @@ namespace Runesole
             else if (IsInRange(Player.main.position, meleePlayerDetect))
             {
                 // chase player
-                position += (Player.main.position - position) * 0.1f;
+                position += (Player.main.position - position) * 2f * Time.deltaTime;
             }
         }
     }
