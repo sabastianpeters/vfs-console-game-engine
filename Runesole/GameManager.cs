@@ -51,7 +51,7 @@ namespace Runesole
 		/// Called at begining of each frame
 		public static void Update ()
 		{
-			
+			Debug.Draw();
 		}
 
 		/// Called at end of each frame

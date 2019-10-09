@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Runesole.Engine;
@@ -75,7 +73,7 @@ namespace Runesole
 		{
 			if (0 <= x && x < width && 0 <= y && y < height)
 				return blockGrid[x][y];
-			return WorldBlock.empty;
+			return WorldBlock.deepWaterBlock;
 		}
 
 		public void SetBlockAt(int x, int y, WorldBlock block)
@@ -89,8 +87,7 @@ namespace Runesole
 		{
 			this.width = width;
 			this.height = height;
-			Random rand = new Random();
-			
+
 
 			// Initializes the world array with stone blocks
 			blockGrid = new WorldBlock[width][];
