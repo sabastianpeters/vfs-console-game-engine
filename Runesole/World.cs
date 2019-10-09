@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Runesole.Engine;
@@ -89,8 +87,7 @@ namespace Runesole
 		{
 			this.width = width;
 			this.height = height;
-			Random rand = new Random();
-			
+
 
 			// Initializes the world array with stone blocks
 			blockGrid = new WorldBlock[width][];
