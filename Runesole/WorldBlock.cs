@@ -16,7 +16,8 @@ namespace Runesole.Engine
 		// Static reference to blocks
 		public static WorldBlock stoneWall;
 		public static WorldBlock stone;
-		public static WorldBlock grass;
+		public static WorldBlock grass1;
+        public static WorldBlock grass2;
         public static WorldBlock deepWaterBlock;
         public static WorldBlock waterBlock; // deep water cant walk on
         public static WorldBlock water; // water player can walk on
@@ -82,10 +83,15 @@ namespace Runesole.Engine
                 new Spit(' ', Color.Background.BrightGreen)
             );
 
-            grass = new WorldBlock(
+            grass1 = new WorldBlock(
 				false,
 				new Spit(' ', Color.Background.Green)
 			);
-		}
+
+            grass2 = new WorldBlock(
+                false,
+                new Spit('/', Color.Forground.BrightGreen, Color.Background.Green)
+            );
+        }
 	}
 }
