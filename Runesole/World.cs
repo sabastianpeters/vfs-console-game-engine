@@ -97,16 +97,9 @@ namespace Runesole
 
 				for (int y = 0; y < height; y++)
 				{
-					blockGrid[x][y] = WorldBlock.stone;
+					blockGrid[x][y] = WorldBlock.deepWaterBlock;
 				}
 			}
-
-            Rect(0, 0, width, height, WorldBlock.deepWaterBlock);
-            Rect(3, 3, width - 3, height - 3, WorldBlock.waterBlock);
-            Rect(7, 7, width - 7, height - 7, WorldBlock.water);
-            Rect(10, 10, width - 10, height - 10, WorldBlock.sand);
-            Rect(15, 15, width - 15, height - 15, WorldBlock.cutGrass);
-            Rect(22, 22, width - 22, height - 22, WorldBlock.grass);
 
             blockGrid[0][0]  = new WorldBlock(false, new Spit('X', Color.Background.Red));
 		}

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,31 +18,32 @@ namespace Runesole
 		public static Camera camera;
 
 
+        // Different worlds
+        private static World mainWorld;
+
 		static Player player;
 
 		/// Called at start of program
 		public static void Start ()
 		{
-			world = new World(160, 80);
 			player = new Player();
 			camera = new Camera();
 
 			player.position = new Vector2(80,40);
 
-			world.SetBlockAt(10, 10, WorldBlock.grass);
-			world.SetBlockAt(11, 10, WorldBlock.grass);
+            CreateWorlds();
 
-			for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
 			{
                 MeleeEnemy enemy1 = new MeleeEnemy();
-                enemy1.position = new Vector2(0, 0);
+                enemy1.position = new Vector2(Random.Range(7,153), Random.Range(7, 73));
                 enemy1.OnDeath += () => player.AddExp(2f);
 			}
 
             for (int i = 0; i < 10; i++)
             {
                 RangedEnemy enemy2 = new RangedEnemy();
-                enemy2.position = new Vector2(i + 3, i * 3);
+                enemy2.position = new Vector2(Random.Range(7, 153), Random.Range(7, 73));
                 enemy2.OnDeath += () => player.AddExp(2f);
             }
         }
@@ -60,5 +60,21 @@ namespace Runesole
 		{
 		
 		}
+
+        private static void CreateWorlds()
+        {
+            int width = 160;
+            int height = 80;
+
+            mainWorld = new World(width, height);
+            mainWorld.Rect(0, 0, width, height, WorldBlock.deepWaterBlock);
+            mainWorld.Rect(3, 3, width - 3, height - 3, WorldBlock.waterBlock);
+            mainWorld.Rect(7, 7, width - 7, height - 7, WorldBlock.water);
+            mainWorld.Rect(10, 10, width - 10, height - 10, WorldBlock.sand);
+            mainWorld.Rect(15, 15, width - 15, height - 15, WorldBlock.cutGrass);
+            mainWorld.Rect(22, 22, width - 22, height - 22, WorldBlock.grass);
+
+            world = mainWorld;
+        }
 	}
 }
