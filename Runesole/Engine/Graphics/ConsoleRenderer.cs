@@ -136,12 +136,25 @@ namespace Runesole.Engine.Graphics
 
 		private static void _UpdateSize ()
 		{
+			//Console.SetWindowSize(130, 50);
+			Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+
+			Width = Console.WindowWidth - 2;
+			Height = Console.WindowHeight - 2;
+
+			// update border string
+			string stylePrefix = $"\u001b[{(int)borderBG};{(int)borderFG}m";
+			borderString = stylePrefix + borderChar;
+			borderRow = stylePrefix + new String(borderChar, Console.WindowWidth);
+
+			/*
 			// ensures window doesn't become larger than the maximum buffer
 			Console.SetWindowSize(130, 50);
 			Console.SetBufferSize(130, 50);
 
 			Width = Console.WindowWidth - 2;
 			Height = Console.WindowHeight - 2;
+			*/
 		}
 
 
@@ -157,9 +170,6 @@ namespace Runesole.Engine.Graphics
 			Console.OutputEncoding = Encoding.UTF8;
 
 			_UpdateSize();
-			string stylePrefix = $"\u001b[{(int)borderBG};{(int)borderFG}m";
-			borderString = stylePrefix + borderChar;
-			borderRow = stylePrefix + new String(borderChar, Console.BufferWidth);
 		}
 	}
 }
