@@ -14,9 +14,9 @@ namespace Runesole
 
         void Start()
         {
-            maxHealth = 10;
-            health = 10;
-            attackDmg = 1;
+            maxHealth = 10f;
+            health = 10f;
+            attackDmg = 1f;
 
             sprite = SpriteManager.enemy_melee;
         }
@@ -32,6 +32,7 @@ namespace Runesole
                 // chase player
                 position += (Player.main.position - position) * 2f * Time.deltaTime;
             }
+            TakeDamage(Time.deltaTime*1f);
         }
     }
 }
