@@ -34,6 +34,12 @@ namespace Runesole
             }
             TakeDamage(Time.deltaTime*1f);
         }
+
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+            sprite = SpriteManager.enemy_melee_damaged;
+        }
     }
 }
 

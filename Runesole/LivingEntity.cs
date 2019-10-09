@@ -16,17 +16,17 @@ namespace Runesole
 
         public event Action OnDeath;
 
-        public void Attack(LivingEntitiy entity)
+        public virtual void Attack(LivingEntitiy entity)
         {
             entity.TakeDamage(attackDmg);
         }
 
-        public void ResetHealth()
+        public virtual void ResetHealth()
         {
             health = maxHealth;
         }
 
-        public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage)
         {
             health -= damage;
             if(health < 1f)
@@ -36,7 +36,7 @@ namespace Runesole
             }
         }
 
-        public void Heal(float hp)
+        public virtual void Heal(float hp)
         {
             health += hp;
             if(health > maxHealth)
@@ -45,7 +45,7 @@ namespace Runesole
             }
         }
 
-        public bool IsInRange(Vector2 v, float range)
+        public virtual bool IsInRange(Vector2 v, float range)
         {
             if (Vector2.SqrDistance(v, position) < range * range)
                 return true;

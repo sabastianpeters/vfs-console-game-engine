@@ -20,7 +20,9 @@ namespace Runesole
 
 		// Enemy Sprites
 		public static Sprite enemy_ranged;
+        public static Sprite enemy_ranged_damaged;
         public static Sprite enemy_melee;
+        public static Sprite enemy_melee_damaged;
 
         // Create all sprites
         public static void GenerateSprites ()
@@ -45,9 +47,15 @@ namespace Runesole
             enemy_melee = new Sprite(1, 1);
 			enemy_melee.SetSpit(0, 0, new Spit(' ', Color.Background.Red)); /// head
 
+            enemy_melee_damaged = new Sprite(1, 2);
+            enemy_melee_damaged.SetSpit(0, 0, new Spit('/', Color.Forground.Red, Color.Background.Yellow)); /// head
+
             // Ranged Enemy Sprites
             enemy_ranged = new Sprite(1, 1);
             enemy_ranged.SetSpit(0, 0, new Spit(' ', Color.Background.Magenta)); /// head
+
+            enemy_ranged_damaged = new Sprite(1, 2);
+            enemy_ranged_damaged.SetSpit(0, 0, new Spit('/', Color.Forground.Red, Color.Background.Magenta)); /// head
 
         }
     }

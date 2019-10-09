@@ -72,7 +72,24 @@ namespace Runesole
             mainWorld.Rect(7, 7, width - 7, height - 7, WorldBlock.water);
             mainWorld.Rect(10, 10, width - 10, height - 10, WorldBlock.sand);
             mainWorld.Rect(15, 15, width - 15, height - 15, WorldBlock.cutGrass);
-            mainWorld.Rect(22, 22, width - 22, height - 22, WorldBlock.grass);
+            mainWorld.Rect(22, 22, width - 22, height - 22, WorldBlock.grass1);
+            mainWorld.Rect(23, 23, width - 23, height - 23,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass1,
+                WorldBlock.grass2);
+
 
             world = mainWorld;
         }
