@@ -46,14 +46,11 @@ namespace Runesole
 
         void DoAttack()
         {
-            if (Input.GetKeyDown(Controls.attackRight))
-                AttackRight();
-            if (Input.GetKeyDown(Controls.attackLeft))
-                AttackLeft();
-            if (Input.GetKeyDown(Controls.attackUp))
-                AttackUp();
-            if (Input.GetKeyDown(Controls.attackDown))
-                AttackDown();
+			
+            if (Input.GetKeyDown(Controls.attack) || Input.GetKey(Controls.attack))
+			{
+				sprite = SpriteManager.player_attack;
+			}
         }
 
         void DoMovement()
@@ -117,23 +114,5 @@ namespace Runesole
             attackDmg += 1;
             moveSpeed += 0.02f;
         }
-		
-
-		void AttackRight ()
-		{
-			sprite = SpriteManager.player_attack_all;
-		}
-		void AttackLeft()
-		{
-			sprite = SpriteManager.player_attack_all;
-		}
-		void AttackUp()
-		{
-			sprite = SpriteManager.player_attack_all;
-		}
-		void AttackDown()
-		{
-			sprite = SpriteManager.player_attack_all;
-		}
     }
 }

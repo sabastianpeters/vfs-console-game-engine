@@ -17,12 +17,8 @@ namespace Runesole
 		public static Key moveRight = Key.D;
 		public static Key moveUp = Key.W;
 		public static Key moveDown = Key.S;
-		public static Key run = Key.LeftShift;
-
-		public static Key attackLeft = Key.Left;
-		public static Key attackRight = Key.Right;
-		public static Key attackUp = Key.Up;
-		public static Key attackDown = Key.Down;
+		
+		public static Key attack = Key.Up;
 
 
 		public static Key snapCamera = Key.Space;
