@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Runesole.Engine;
@@ -59,42 +57,23 @@ namespace Runesole
 		}
 
 
-		public void Rect(int x, int y, int width, int height, WorldBlock fill, WorldBlock wall)
-		{
-
-			int drawX = x, drawY = y;
-
-			/// sets top and bottom rows
-			for (drawX = x; drawX < width; drawX++)
-			{
-				SetBlockAt(drawX, 0, wall);
-				SetBlockAt(drawX, height-1, wall);
-			}
-
-
-			for (drawY = y+1; drawY < height-1; drawY++)
-			{
-				drawX = x;
-				SetBlockAt(drawX++, drawY, wall); /// left wall
-				SetBlockAt(drawX++, drawY, wall); /// left wall
-
-				while (drawX < width-2)
-				{
-					SetBlockAt(drawX++, drawY, fill); // center fill
-				}
-
-				SetBlockAt(drawX++, drawY, wall); /// right wall
-				SetBlockAt(drawX++, drawY, wall); /// right wall
-			}
-			
-		}
-
+        public void Rect(int x, int y, int width, int height, WorldBlock fill)
+        {
+            for (int drawX = x; drawX < width; drawX++)
+            {
+                for (int drawY = y; drawY < height; drawY++)
+                {
+                    SetBlockAt(drawX, drawY, fill);
+                }
+            }
+        }
+        
 
 		public WorldBlock GetBlockAt(int x, int y)
 		{
 			if (0 <= x && x < width && 0 <= y && y < height)
 				return blockGrid[x][y];
-			return WorldBlock.empty;
+			return WorldBlock.deepWaterBlock;
 		}
 
 		public void SetBlockAt(int x, int y, WorldBlock block)
@@ -108,8 +87,7 @@ namespace Runesole
 		{
 			this.width = width;
 			this.height = height;
-			Random rand = new Random();
-			
+
 
 			// Initializes the world array with stone blocks
 			blockGrid = new WorldBlock[width][];
@@ -119,11 +97,11 @@ namespace Runesole
 
 				for (int y = 0; y < height; y++)
 				{
-					blockGrid[x][y] = WorldBlock.stone;
+					blockGrid[x][y] = WorldBlock.deepWaterBlock;
 				}
 			}
 
-			blockGrid[0][0]  = new WorldBlock(false, new Spit('X', Color.Background.Red));
+            blockGrid[0][0]  = new WorldBlock(false, new Spit('X', Color.Background.Red));
 		}
 	}
 }

@@ -60,11 +60,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enemy.cs" />
     <Compile Include="Engine\Bounds.cs" />
     <Compile Include="Engine\Camera.cs" />
     <Compile Include="Controls.cs" />
+    <Compile Include="Engine\Debug.cs" />
     <Compile Include="Engine\Graphics\Coord.cs" />
     <Compile Include="Engine\Graphics\Colors.cs" />
+    <Compile Include="Engine\Random.cs" />
     <Compile Include="Engine\Utility\FramerateCounter.cs" />
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\Input.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Engine\Utility\NativeFunctions.cs" />
     <Compile Include="LivingEntity.cs" />
     <Compile Include="MeleeEnemy.cs" />
+    <Compile Include="PlayerUI.cs" />
     <Compile Include="RangedEnemy.cs" />
     <Compile Include="WorldBlock.cs" />
     <Compile Include="Engine\Program.cs" />
@@ -83,7 +87,7 @@
     <Compile Include="Engine\Graphics\Sprite.cs" />
     <Compile Include="SpriteManager.cs" />
     <Compile Include="Engine\Time.cs" />
-    <Compile Include="Engine\UI.cs" />
+    <Compile Include="Engine\Graphics\UI.cs" />
     <Compile Include="Engine\Vectors.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>

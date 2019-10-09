@@ -40,7 +40,8 @@ namespace Runesole.Engine
 			// Initialize engine classes
 			ConsoleRenderer.Init();
 			Input.Init();
-			Time.Init();				
+			Time.Init();
+            Runesole.Engine.Random.Init();
 
 			// Game Setup
 			SpriteManager.GenerateSprites();	/// generates sprites
