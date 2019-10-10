@@ -59,9 +59,9 @@ namespace Runesole
 
         public void Rect(int x, int y, int width, int height, WorldBlock fill)
         {
-            for (int drawX = x; drawX < width; drawX++)
+            for (int drawX = x; drawX < x + width; drawX++)
             {
-                for (int drawY = y; drawY < height; drawY++)
+                for (int drawY = y; drawY < y + height; drawY++)
                 {
                     SetBlockAt(drawX, drawY, fill);
                 }
@@ -70,9 +70,9 @@ namespace Runesole
 
         public void Rect(int x, int y, int width, int height, params WorldBlock[] fill)
         {
-            for (int drawX = x; drawX < width; drawX++)
+            for (int drawX = x; drawX < x + width; drawX++)
             {
-                for (int drawY = y; drawY < height; drawY++)
+                for (int drawY = y; drawY < y + height; drawY++)
                 {
                     SetBlockAt(drawX, drawY, fill[Random.Range(0, fill.Length)]);
                 }
