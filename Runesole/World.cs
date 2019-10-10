@@ -80,10 +80,10 @@ namespace Runesole
         }
 
 
-        public WorldBlock GetBlockAt(int x, int y)
+        public WorldBlock GetBlockAt(int worldX, int worldY)
 		{
-			if (0 <= x && x < width && 0 <= y && y < height)
-				return blockGrid[x][y];
+			if (0 <= worldX && worldX < width && 0 <= worldY && worldY < height)
+				return blockGrid[worldX][worldY];
 			return WorldBlock.deepWaterBlock;
 		}
 

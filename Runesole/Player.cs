@@ -112,7 +112,11 @@ namespace Runesole
                 x *= Time.deltaTime * moveSpeed;
                 y *= Time.deltaTime * moveSpeed;
 
-                position = new Vector2(position.x + x, position.y + y);
+                Vector2 newPos = new Vector2(position.x + x, position.y + y);
+				if(!GameManager.world.GetBlockAt(Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)).isCollidable)
+				{
+					position = newPos;
+				}
             }
         }
 
