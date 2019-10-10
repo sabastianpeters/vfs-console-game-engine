@@ -31,9 +31,8 @@ namespace Runesole
 			m_player.position = new Vector2(80,40);
 
             CreateWorlds();
-            CreateRoom();
 
-            SpawnMobs();
+            EnemyManager.SpawnEnemies();
         }
 
 		/// Called at begining of each frame
@@ -49,25 +48,6 @@ namespace Runesole
 		
 		}
 
-        private static void SpawnMobs()
-        {
-            //spawns melee enemies
-            for (int i = 0; i < 10; i++)
-            {
-                MeleeEnemy enemy1 = new MeleeEnemy();
-                enemy1.position = new Vector2(Random.Range(7, 153), Random.Range(7, 73));
-                enemy1.OnDeath += () => m_player.AddExp(2f);
-            }
-            //spawns ranged enemies
-            for (int i = 0; i < 10; i++)
-            {
-                RangedEnemy enemy2 = new RangedEnemy();
-                enemy2.position = new Vector2(Random.Range(7, 153), Random.Range(7, 73));
-                enemy2.OnDeath += () => m_player.AddExp(2f);
-            }
-        }
-
-        //creates the map
         private static void CreateWorlds()
         {
             int width = 160;
@@ -97,19 +77,15 @@ namespace Runesole
                 WorldBlock.grass1,
                 WorldBlock.grass2);
 
+			int posX = Random.Range(25, 135);
+			int posY = Random.Range(25, 55);
 
-            world = m_mainWorld;
-        }
+			m_mainWorld.Rect(posX, posY, 10, 10, WorldBlock.stoneWall);
+			m_mainWorld.Rect(posX + 1, posY + 1, 8, 8, WorldBlock.stone);
+			m_mainWorld.SetBlockAt(posX, posY + 3, WorldBlock.stone);
+			m_mainWorld.SetBlockAt(posX, posY + 4, WorldBlock.stone);
 
-        private static void CreateRoom()
-        {
-            int posX = Random.Range(25, 135);
-            int posY = Random.Range(25, 55);
-
-            m_mainWorld.Rect(posX, posY, 10, 10, WorldBlock.stoneWall);
-            m_mainWorld.Rect(posX + 1, posY + 1, 8, 8, WorldBlock.stone);
-            m_mainWorld.SetBlockAt(posX, posY + 3, WorldBlock.stone);
-            m_mainWorld.SetBlockAt(posX, posY + 4, WorldBlock.stone);
+			world = m_mainWorld;
         }
 	}
 }

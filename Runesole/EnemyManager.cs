@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +21,7 @@ namespace Runesole
 			// removes enemy from list when enemy dies
 			enemy.OnDeath += () => {
 				enemyList.Remove(enemy);
+				OnEnemyDie();
 			};
 
 			return (EnemyType)enemy;
@@ -30,6 +30,40 @@ namespace Runesole
 		public static EnemyType SpawnEnemy<EnemyType>(float spawnX, float spawnY) where EnemyType : Enemy, new()
 		{
 			return SpawnEnemy<EnemyType>(new Vector2(spawnX, spawnY));
+		}
+
+
+		private static void OnEnemyDie ()
+		{
+			if(enemyList.Count <= 0)
+			{
+				SpawnEnemies();
+			}
+		}
+
+
+		public static void SpawnEnemies ()
+		{
+			for (int i = 0; i < 1; i++)
+			{
+				Vector2 spawnPos = Vector2.zero;
+				do {
+					spawnPos = new Vector2(Random.Range(23, GameManager.world.Width - 23), Random.Range(23, GameManager.world.Height - 23));
+				} while (!GameManager.world.CanWalkAt(spawnPos));
+				MeleeEnemy enemy = EnemyManager.SpawnEnemy<MeleeEnemy>(spawnPos);
+				enemy.OnDeath += () => Player.main.AddExp(2f);
+			}
+
+			for (int i = 0; i < 1; i++)
+			{
+				Vector2 spawnPos = Vector2.zero;
+				do
+				{
+					spawnPos = new Vector2(Random.Range(23, GameManager.world.Width - 23), Random.Range(23, GameManager.world.Height - 23));
+				} while (!GameManager.world.CanWalkAt(spawnPos));
+				RangedEnemy enemy = EnemyManager.SpawnEnemy<RangedEnemy>(spawnPos);
+				enemy.OnDeath += () => Player.main.AddExp(2f);
+			}
 		}
 	}
 }

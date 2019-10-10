@@ -9,14 +9,15 @@ namespace Runesole
 {
     class MeleeEnemy : Enemy
     {
-        const float meleeMeleeAttack = 1f;
-        const float meleePlayerDetect = 10f;
+        float rangePlayerDetect = 20f;
 
         void Start()
         {
             maxHealth = 10f;
             health = 10f;
             attackDmg = 1f;
+			moveSpeed = 8f;
+			attackRange = 1;
 
         }
 
@@ -24,15 +25,23 @@ namespace Runesole
 		{
 			sprite = SpriteManager.enemy_melee;
 
-			if (IsInRange(Player.main.position, meleeMeleeAttack))
+			Vector2 newPos = position;
+
+			if (IsInRange(Player.main.position, attackRange - 0.1f))
             {
                 // attack player
             }
-            else if (IsInRange(Player.main.position, meleePlayerDetect))
+            else if (IsInRange(Player.main.position, rangePlayerDetect))
             {
-                // chase player
-                position += (Player.main.position - position) * 2f * Time.deltaTime;
+				// chase player
+				newPos += (Player.main.position - position).Normalize() * moveSpeed * Time.deltaTime;
             }
+
+			// walk to new pos if we can
+			if (CanWalkTo(newPos))
+			{
+				position = newPos;
+			}
         }
 
         public override void TakeDamage(float damage)

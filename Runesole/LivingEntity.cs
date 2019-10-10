@@ -63,6 +63,12 @@ namespace Runesole
 		{
 			IsDead = false;
 		}
+
+		protected bool CanWalkTo (Vector2 pos)
+		{
+			return GameManager.world.CanWalkAt(pos);
+			//return !GameManager.world.GetBlockAt(Mathf.FloorToInt(pos.x + 0.5f), Mathf.FloorToInt(pos.y + 0.5f)).isCollidable;
+		}
 	}
 }
 

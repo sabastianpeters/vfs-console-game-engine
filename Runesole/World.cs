@@ -14,8 +14,8 @@ namespace Runesole
 	{
 
 		private WorldBlock[][] blockGrid; 
-		private int width;
-		private int height;
+		public int Width { get; private set; }
+		public int Height { get; private set; }
 
 		public void Draw (Camera camera)
 		{
@@ -82,22 +82,26 @@ namespace Runesole
 
         public WorldBlock GetBlockAt(int worldX, int worldY)
 		{
-			if (0 <= worldX && worldX < width && 0 <= worldY && worldY < height)
+			if (0 <= worldX && worldX < Width && 0 <= worldY && worldY < Height)
 				return blockGrid[worldX][worldY];
 			return WorldBlock.deepWaterBlock;
 		}
 
 		public void SetBlockAt(int x, int y, WorldBlock block)
 		{
-			if (0 <= x && x < width && 0 <= y && y < height)
+			if (0 <= x && x < Width && 0 <= y && y < Height)
 				blockGrid[x][y] = block;
 		}
 
+		public bool CanWalkAt(Vector2 v)
+		{
+			return !(GetBlockAt(Mathf.RoundToInt(v.x - 1f), Mathf.RoundToInt(v.y)).isCollidable);
+		}
 
 		public World (int width, int height)
 		{
-			this.width = width;
-			this.height = height;
+			this.Width = width;
+			this.Height = height;
 
 
 			// Initializes the world array with stone blocks

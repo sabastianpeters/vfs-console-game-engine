@@ -37,8 +37,7 @@ namespace Runesole
 		void Update ()
 		{
             sprite = SpriteManager.player_idle; /// by default draws base player
-
-			Debug.Log("hey");
+			
 			DoMovement();
 			RegenHealth();
 			DoAttack();
@@ -49,7 +48,7 @@ namespace Runesole
 
         public void RegenHealth()
         {
-            Heal(Time.deltaTime * 1f);
+            //Heal(Time.deltaTime * 1f);
         }
 
         void DoAttack()
@@ -113,7 +112,7 @@ namespace Runesole
                 y *= Time.deltaTime * moveSpeed;
 
                 Vector2 newPos = new Vector2(position.x + x, position.y + y);
-				if(!GameManager.world.GetBlockAt(Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)).isCollidable)
+				if(CanWalkTo(newPos))
 				{
 					position = newPos;
 				}

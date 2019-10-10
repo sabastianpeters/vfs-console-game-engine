@@ -9,38 +9,47 @@ namespace Runesole
 {
     class RangedEnemy : Enemy
     {
-        const float rangeRunaway = 5f;
-        const float rangeRangedAttack = 5f;
-        const float rangePlayerDetect = 10f;
+        float rangeRunaway = 5f;
+        float rangePlayerDetect = 20f;
 
         void Start()
         {
             maxHealth = 5f;
             health = 5f;
             attackDmg = 2f;
+			moveSpeed = 4f;
+			attackRange = 5;
 
-        }
+		}
 
         void Update()
 		{
 			sprite = SpriteManager.enemy_ranged;
 
-			if (IsInRange(Player.main.position, rangeRunaway))
-            {
-                // run away
-                position += (Player.main.position - position) * -1.5f * Time.deltaTime;
-            }
-            else if (IsInRange(Player.main.position, rangeRangedAttack))
-            {
-                // attack player
+			Vector2 newPos = position;
 
+            if (IsInRange(Player.main.position, attackRange - 2f))
+			{
+				// run away
+				newPos += (Player.main.position - position).Normalize() * -moveSpeed * Time.deltaTime;
+			}
+			else if(IsInRange(Player.main.position, attackRange)) 
+            {
+				// attack player
             }
             else if (IsInRange(Player.main.position, rangePlayerDetect))
             {
-                // chase player
-                position += (Player.main.position - position) * 1.5f * Time.deltaTime;
+				// chase player
+				newPos += (Player.main.position - position).Normalize() * moveSpeed * Time.deltaTime;
             }
-        }
+
+
+			// walk to new pos if we can
+			if (CanWalkTo(newPos))
+			{
+				position = newPos;
+			}
+		}
 
         public override void TakeDamage(float damage)
         {
