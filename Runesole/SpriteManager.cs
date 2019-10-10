@@ -45,7 +45,7 @@ namespace Runesole
 
             // Melee Enemy Sprites
             enemy_melee = new Sprite(1, 1);
-			enemy_melee.SetSpit(0, 0, new Spit(' ', Color.Background.Red)); /// head
+			enemy_melee.SetSpit(0, 0, new Spit(' ', Color.Background.Yellow)); /// head
 
             enemy_melee_damaged = new Sprite(1, 2);
             enemy_melee_damaged.SetSpit(0, 0, new Spit('/', Color.Forground.Red, Color.Background.Yellow)); /// head
