@@ -67,9 +67,20 @@ namespace Runesole
                 }
             }
         }
-        
 
-		public WorldBlock GetBlockAt(int x, int y)
+        public void Rect(int x, int y, int width, int height, params WorldBlock[] fill)
+        {
+            for (int drawX = x; drawX < width; drawX++)
+            {
+                for (int drawY = y; drawY < height; drawY++)
+                {
+                    SetBlockAt(drawX, drawY, fill[Random.Range(0, fill.Length)]);
+                }
+            }
+        }
+
+
+        public WorldBlock GetBlockAt(int x, int y)
 		{
 			if (0 <= x && x < width && 0 <= y && y < height)
 				return blockGrid[x][y];

@@ -9,34 +9,43 @@ namespace Runesole
 {
 	class LivingEntitiy : GameObject
 	{
-        public int health;
-        public int maxHealth;
-        public int attackDmg;
+        public float health;
+        public float maxHealth;
+        public float attackDmg;
         public float moveSpeed;
 
         public event Action OnDeath;
 
-        public void Attack(LivingEntitiy entity)
+        public virtual void Attack(LivingEntitiy entity)
         {
             entity.TakeDamage(attackDmg);
         }
 
-        public void ResetHealth()
+        public virtual void ResetHealth()
         {
-
+            health = maxHealth;
         }
 
-        public void TakeDamage(int damage)
+        public virtual void TakeDamage(float damage)
         {
-
+            health -= damage;
+            if(health < 1f)
+            {
+                OnDeath();
+                this.Destroy();
+            }
         }
 
-        public void Heal(int hp)
+        public virtual void Heal(float hp)
         {
-
+            health += hp;
+            if(health > maxHealth)
+            {
+                health = maxHealth;
+            }
         }
 
-        public bool IsInRange(Vector2 v, float range)
+        public virtual bool IsInRange(Vector2 v, float range)
         {
             if (Vector2.SqrDistance(v, position) < range * range)
                 return true;

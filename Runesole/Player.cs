@@ -15,8 +15,6 @@ namespace Runesole
 	class Player : LivingEntitiy
 	{
 		public static Player main;
-		
-		private const float walkSpeed = 10f;
 
         public float experience = 0f;
         public float maxExperience = 10f;
@@ -29,7 +27,7 @@ namespace Runesole
             health = 10;
             maxHealth = 10;
             attackDmg = 2;
-            moveSpeed = 1f;
+            base.moveSpeed = 7f;
 
 			if (main == null)
 				main = this; // if no main player, become the main one
@@ -42,7 +40,14 @@ namespace Runesole
             DoMovement();
             DoAttack();
             Camera.main.position = position;
-		}
+            RegenHealth();
+
+        }
+
+        public void RegenHealth()
+        {
+            Heal(Time.deltaTime * 1f);
+        }
 
         void DoAttack()
         {
@@ -89,8 +94,8 @@ namespace Runesole
                 }
 
 
-                x *= Time.deltaTime * walkSpeed;
-                y *= Time.deltaTime * walkSpeed;
+                x *= Time.deltaTime * moveSpeed;
+                y *= Time.deltaTime * moveSpeed;
 
                 position = new Vector2(position.x + x, position.y + y);
             }
@@ -111,8 +116,9 @@ namespace Runesole
         {
             level++;
             maxHealth += 2;
+            //health = maxHealth;
             attackDmg += 1;
-            moveSpeed += 0.02f;
+            base.moveSpeed += 0.02f;
         }
     }
 }

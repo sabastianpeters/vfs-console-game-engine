@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Runesole.Engine;
 
 namespace Runesole
 {
@@ -13,9 +14,9 @@ namespace Runesole
 
         void Start()
         {
-            maxHealth = 10;
-            health = 10;
-            attackDmg = 1;
+            maxHealth = 10f;
+            health = 10f;
+            attackDmg = 1f;
 
             sprite = SpriteManager.enemy_melee;
         }
@@ -29,8 +30,15 @@ namespace Runesole
             else if (IsInRange(Player.main.position, meleePlayerDetect))
             {
                 // chase player
-                position += (Player.main.position - position) * 0.1f;
+                position += (Player.main.position - position) * 2f * Time.deltaTime;
             }
+            TakeDamage(Time.deltaTime*1f);
+        }
+
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+            sprite = SpriteManager.enemy_melee_damaged;
         }
     }
 }
