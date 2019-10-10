@@ -18,16 +18,17 @@ namespace Runesole
 
         public float experience = 0f;
         public float maxExperience = 10f;
-        public int level;
+        public int level = 1;
 
 
         void Start()
 		{
             level = 1;
-            health = 10;
-            maxHealth = 10;
+            maxHealth = 15;
+			ResetHealth();
             attackDmg = 2;
-            base.moveSpeed = 7f;
+			attackRange = 2f;
+            moveSpeed = 7f;
 
 			if (main == null)
 				main = this; // if no main player, become the main one
@@ -37,10 +38,12 @@ namespace Runesole
 		{
             sprite = SpriteManager.player_idle; /// by default draws base player
 
-            DoMovement();
-            DoAttack();
-            Camera.main.position = position;
-            RegenHealth();
+			Debug.Log("hey");
+			DoMovement();
+			RegenHealth();
+			DoAttack();
+
+			Camera.main.position = position;
 
         }
 
@@ -51,10 +54,22 @@ namespace Runesole
 
         void DoAttack()
         {
-			
-            if (Input.GetKeyDown(Controls.attack) || Input.GetKey(Controls.attack))
+			for(int i = 0; i < EnemyManager.enemyList.Count; i++)
 			{
-				sprite = SpriteManager.player_attack;
+				// Attacks enemy and if enemy is in range of player, attack the player
+				Enemy enemy = EnemyManager.enemyList[i];
+
+				// Player attack
+				if (Input.GetKeyDown(Controls.attack) || Input.GetKey(Controls.attack))
+				{
+					sprite = SpriteManager.player_attack;
+					Attack(enemy);
+				}
+
+				if(!enemy.IsDead)
+				{
+					enemy.Attack(this); /// attack player
+				}
 			}
         }
 

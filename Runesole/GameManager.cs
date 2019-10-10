@@ -19,40 +19,37 @@ namespace Runesole
 
 
         // Different worlds
-        private static World mainWorld;
-
-		static Player player;
+        private static World m_mainWorld;
+		private static Player m_player;
 
 		/// Called at start of program
 		public static void Start ()
 		{
-			player = new Player();
+			m_player = new Player();
 			camera = new Camera();
 
-			player.position = new Vector2(80,40);
+			m_player.position = new Vector2(80,40);
 
             CreateWorlds();
 
             for (int i = 0; i < 10; i++)
 			{
-                MeleeEnemy enemy1 = new MeleeEnemy();
-                enemy1.position = new Vector2(Random.Range(7,153), Random.Range(7, 73));
-                enemy1.OnDeath += () => player.AddExp(2f);
+				MeleeEnemy enemy = EnemyManager.SpawnEnemy<MeleeEnemy>(Random.Range(7, 153), Random.Range(7, 73));
+				enemy.OnDeath += () => m_player.AddExp(2f);
 			}
 
             for (int i = 0; i < 10; i++)
-            {
-                RangedEnemy enemy2 = new RangedEnemy();
-                enemy2.position = new Vector2(Random.Range(7, 153), Random.Range(7, 73));
-                enemy2.OnDeath += () => player.AddExp(2f);
-            }
+			{
+				RangedEnemy enemy = EnemyManager.SpawnEnemy<RangedEnemy>(Random.Range(7, 153), Random.Range(7, 73));
+				enemy.OnDeath += () => m_player.AddExp(2f);
+			}
         }
 
 		/// Called at begining of each frame
 		public static void Update ()
 		{
 			Debug.Draw();
-            PlayerUI.Draw(player);
+            PlayerUI.Draw(m_player);
 		}
 
 		/// Called at end of each frame
@@ -66,14 +63,14 @@ namespace Runesole
             int width = 160;
             int height = 80;
 
-            mainWorld = new World(width, height);
-            mainWorld.Rect(0, 0, width, height, WorldBlock.deepWaterBlock);
-            mainWorld.Rect(3, 3, width - 3, height - 3, WorldBlock.waterBlock);
-            mainWorld.Rect(7, 7, width - 7, height - 7, WorldBlock.water);
-            mainWorld.Rect(10, 10, width - 10, height - 10, WorldBlock.sand);
-            mainWorld.Rect(15, 15, width - 15, height - 15, WorldBlock.cutGrass);
-            mainWorld.Rect(22, 22, width - 22, height - 22, WorldBlock.grass1);
-            mainWorld.Rect(23, 23, width - 23, height - 23,
+            m_mainWorld = new World(width, height);
+            m_mainWorld.Rect(0, 0, width, height, WorldBlock.deepWaterBlock);
+            m_mainWorld.Rect(3, 3, width - 3, height - 3, WorldBlock.waterBlock);
+            m_mainWorld.Rect(7, 7, width - 7, height - 7, WorldBlock.water);
+            m_mainWorld.Rect(10, 10, width - 10, height - 10, WorldBlock.sand);
+            m_mainWorld.Rect(15, 15, width - 15, height - 15, WorldBlock.cutGrass);
+            m_mainWorld.Rect(22, 22, width - 22, height - 22, WorldBlock.grass1);
+            m_mainWorld.Rect(23, 23, width - 23, height - 23,
                 WorldBlock.grass1,
                 WorldBlock.grass1,
                 WorldBlock.grass1,
@@ -91,7 +88,7 @@ namespace Runesole
                 WorldBlock.grass2);
 
 
-            world = mainWorld;
+            world = m_mainWorld;
         }
 	}
 }

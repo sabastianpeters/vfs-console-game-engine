@@ -18,12 +18,13 @@ namespace Runesole
             health = 10f;
             attackDmg = 1f;
 
-            sprite = SpriteManager.enemy_melee;
         }
 
         void Update()
-        {
-            if (IsInRange(Player.main.position, meleeMeleeAttack))
+		{
+			sprite = SpriteManager.enemy_melee;
+
+			if (IsInRange(Player.main.position, meleeMeleeAttack))
             {
                 // attack player
             }
@@ -32,7 +33,6 @@ namespace Runesole
                 // chase player
                 position += (Player.main.position - position) * 2f * Time.deltaTime;
             }
-            TakeDamage(Time.deltaTime*1f);
         }
 
         public override void TakeDamage(float damage)
