@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,31 +24,43 @@ namespace Runesole
         void Start()
 		{
             level = 1;
-            maxHealth = 15;
+            maxHealth = 30;
 			ResetHealth();
+			health = 10;
             attackDmg = 2;
 			attackRange = 2f;
             moveSpeed = 7f;
 
 			if (main == null)
 				main = this; // if no main player, become the main one
+
+			CoroutineManager.Call(RegenHealth());
 		}
 
 		void Update ()
 		{
             sprite = SpriteManager.player_idle; /// by default draws base player
 			
-			DoMovement();
-			RegenHealth();
-			DoAttack();
+			// only runs player controls when game isn't paused
+			if(!GameManager.IsPaused)
+			{
+				DoMovement();
+				RegenHealth();
+				DoAttack();
+			}
 
 			Camera.main.position = position;
 
         }
 
-        public void RegenHealth()
+        public IEnumerator RegenHealth()
         {
-            //Heal(Time.deltaTime * 1f);
+			while(true)
+			{
+				yield return new WaitForSeconds(1f);
+				health += 1;
+				yield return null;
+			}
         }
 
         void DoAttack()

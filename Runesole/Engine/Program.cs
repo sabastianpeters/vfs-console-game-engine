@@ -61,6 +61,7 @@ namespace Runesole.Engine
 				// core game
 				GameObject.__CallUpdateEvent();					/// Preforms game logic on gameobjects
 				GameManager.Update();                           /// updates game logic
+				CoroutineManager.Update();						/// updates coroutine logic
 				GameManager.camera.Update();					///	updates camera
 				GameManager.world.Draw(GameManager.camera);		/// draws the world
 				GameObject.__DrawGameObjects(GameManager.camera);	/// draws game objects
@@ -94,7 +95,7 @@ namespace Runesole.Engine
 				}
 
 
-				UI.String(Coord.BottomLeft, "HEY: "+toggled.ToString());
+				UI.StringLeft(Coord.BottomLeft, "HEY: "+toggled.ToString());
 
 
 				toggled = !toggled;

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 using Runesole.Engine;
@@ -16,6 +16,7 @@ namespace Runesole
 		// What world to draw and camera to use (public so Main() can access)
 		public static World world;
 		public static Camera camera;
+		public static bool IsPaused { get; private set; }
 
 
         // Different worlds
@@ -33,19 +34,25 @@ namespace Runesole
             CreateWorlds();
 
             EnemyManager.SpawnEnemies();
-        }
+		}
+
 
 		/// Called at begining of each frame
 		public static void Update ()
 		{
-			Debug.Draw();
-            PlayerUI.Draw(m_player);
+			if(Input.GetKeyDown(Controls.pauseGame))
+				TogglePause();
+
+			if(IsPaused)
+				Debug.Log("Game is paused");
+				
+			PlayerUI.Draw(m_player);
 		}
 
 		/// Called at end of each frame
 		public static void LateUpdate()
 		{
-		
+			Debug.Draw();
 		}
 
         private static void CreateWorlds()
@@ -87,5 +94,31 @@ namespace Runesole
 
 			world = m_mainWorld;
         }
+
+
+		// Toggles if the game is paused and returns if the game was resumed
+		public static bool TogglePause ()
+		{
+			if(IsPaused)
+				UnpauseGame();
+			else
+				PauseGame();
+
+			return IsPaused;
+		}
+
+		// Pauses the game
+		public static void PauseGame ()
+		{
+			IsPaused = true;
+			Time.timeScale = 0;
+		}
+
+		// Unpauses the game
+		public static void UnpauseGame ()
+		{
+			IsPaused = false;
+			Time.timeScale = 1;
+		}
 	}
 }
