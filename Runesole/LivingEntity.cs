@@ -54,9 +54,7 @@ namespace Runesole
 
 		public virtual bool IsInRange(Vector2 v, float range)
 		{
-			if (Vector2.SqrDistance(v, position) < range * range)
-				return true;
-			return false;
+			return Vector2.SqrDistance(v, position) < range * range;
 		}
 
 		protected LivingEntitiy() : base()
