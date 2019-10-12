@@ -27,12 +27,15 @@ namespace Runesole
 		}
 		public virtual void ResetHealth()
 		{
-			health = maxHealth;
+            //set health to maxiumium health
+            health = maxHealth;
 		}
 
 		public virtual void TakeDamage(float damage)
 		{
 			health -= damage;
+
+            //if the health of any entity is lower then 1, delete the entity 
 			if (health < 1f)
 			{
 				// calls on death if method added
@@ -45,29 +48,32 @@ namespace Runesole
 
 		public virtual void Heal(float hp)
 		{
+            //heals the health by the float hp
 			health += hp;
+
+            //if the health healed is greater then max health, set the health to maxhealth
 			if (health > maxHealth)
 			{
-				health = maxHealth;
-			}
+                ResetHealth();
+            }
 		}
 
 		public virtual bool IsInRange(Vector2 v, float range)
 		{
-			if (Vector2.SqrDistance(v, position) < range * range)
-				return true;
-			return false;
+            //return if the position is within the range of the entity
+            return Vector2.SqrDistance(v, position) < range * range;
 		}
 
 		protected LivingEntitiy() : base()
 		{
+            //sets the entity to alive
 			IsDead = false;
 		}
 
 		protected bool CanWalkTo (Vector2 pos)
 		{
+            //returns if entity can walk at the block
 			return GameManager.world.CanWalkAt(pos);
-			//return !GameManager.world.GetBlockAt(Mathf.FloorToInt(pos.x + 0.5f), Mathf.FloorToInt(pos.y + 0.5f)).isCollidable;
 		}
 	}
 }

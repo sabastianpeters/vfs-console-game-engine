@@ -12,7 +12,7 @@ namespace Runesole
     {
         public static void Draw(Player player)
         {
-            //player.health 
+            //player level 
             UI.String(
                 Coord.TopLeft + Coord.Down + Coord.Right * 2,
                 "Level: " + player.level, ///TODO make yellow, background black
@@ -20,6 +20,7 @@ namespace Runesole
                 Color.Background.Black
             );
 
+            //player health
             UI.String(
                 Coord.TopLeft + Coord.Down * 2 + Coord.Right *2, 
                 "Health: " + Mathf.FloorToInt(player.health) + " / " + Mathf.FloorToInt(player.maxHealth), /// TODO make green, background black
@@ -27,6 +28,7 @@ namespace Runesole
                 Color.Background.Black
             );
 
+            //player exp
             UI.String(
                 Coord.TopLeft + Coord.Down * 3 + Coord.Right * 2, 
                 "Exp: " + Mathf.FloorToInt(player.experience) + " / " + Mathf.CeilToInt(player.maxExperience), ///TODO make yellow, background black
@@ -34,6 +36,7 @@ namespace Runesole
                 Color.Background.Black
             );
 
+            //player damage
             UI.String(
                 Coord.TopLeft + Coord.Down * 4 + Coord.Right * 2,
                 "Str: " + player.attackDmg, ///TODO make yellow, background black
@@ -41,8 +44,8 @@ namespace Runesole
                 Color.Background.Black
             );
 
-
-			UI.String(
+            //player dead or alive indicator
+            UI.String(
 				Coord.TopLeft + Coord.Down * 5 + Coord.Right * 2,
 				(player.IsDead ? "U dead" : "u good"), ///TODO make yellow, background black
 				player.IsDead ? Color.Forground.BrightRed : Color.Forground.BrightGreen,

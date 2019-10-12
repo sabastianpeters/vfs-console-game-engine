@@ -35,8 +35,10 @@ namespace Runesole
 
 		private static void OnEnemyDie ()
 		{
+            //when an enemy dies checks to see if there is any left
 			if(enemyList.Count <= 0)
 			{
+                //if there is no enemies left spawn 4 more
 				SpawnEnemies();
 			}
 		}
@@ -44,17 +46,19 @@ namespace Runesole
 
 		public static void SpawnEnemies ()
 		{
-			for (int i = 0; i < 1; i++)
+            //spawns 2 melee enemies on the map randomly
+			for (int i = 0; i < 2; i++)
 			{
 				Vector2 spawnPos = Vector2.zero;
 				do {
 					spawnPos = new Vector2(Random.Range(23, GameManager.world.Width - 23), Random.Range(23, GameManager.world.Height - 23));
 				} while (!GameManager.world.CanWalkAt(spawnPos));
 				MeleeEnemy enemy = EnemyManager.SpawnEnemy<MeleeEnemy>(spawnPos);
-				enemy.OnDeath += () => Player.main.AddExp(2f);
+				enemy.OnDeath += () => Player.main.AddExp(2f); ///when the enemy dies give player exp
 			}
 
-			for (int i = 0; i < 1; i++)
+            //spawns 2 ranged enemies on the map randomly
+            for (int i = 0; i < 2; i++)
 			{
 				Vector2 spawnPos = Vector2.zero;
 				do
@@ -62,8 +66,8 @@ namespace Runesole
 					spawnPos = new Vector2(Random.Range(23, GameManager.world.Width - 23), Random.Range(23, GameManager.world.Height - 23));
 				} while (!GameManager.world.CanWalkAt(spawnPos));
 				RangedEnemy enemy = EnemyManager.SpawnEnemy<RangedEnemy>(spawnPos);
-				enemy.OnDeath += () => Player.main.AddExp(2f);
+				enemy.OnDeath += () => Player.main.AddExp(2f); ///when the enemy dies give player exp
 			}
-		}
+        }
 	}
 }

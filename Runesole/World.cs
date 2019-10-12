@@ -95,7 +95,7 @@ namespace Runesole
 
 		public bool CanWalkAt(Vector2 v)
 		{
-			return !(GetBlockAt(Mathf.RoundToInt(v.x - 1f), Mathf.RoundToInt(v.y)).isCollidable);
+			return !(GetBlockAt(Mathf.CeilToInt(v.x - 1f), Mathf.RoundToInt(v.y)).isCollidable);
 		}
 
 		public World (int width, int height)

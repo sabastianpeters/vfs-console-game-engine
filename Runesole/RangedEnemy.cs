@@ -14,6 +14,7 @@ namespace Runesole
 
         void Start()
         {
+            //set the stats for the ranged enemies at the beginning of the game
             maxHealth = 5f;
             health = 5f;
             attackDmg = 2f;
@@ -28,16 +29,16 @@ namespace Runesole
 
 			Vector2 newPos = position;
 
-            if (IsInRange(Player.main.position, attackRange - 2f))
-			{
+            if (IsInRange(Player.main.position, attackRange - 2f)) //if the player is in range of 5 chars runaway
+            {
 				// run away
 				newPos += (Player.main.position - position).Normalize() * -moveSpeed * Time.deltaTime;
 			}
-			else if(IsInRange(Player.main.position, attackRange)) 
+            else if (IsInRange(Player.main.position, attackRange)) //if the player is in range attack
             {
-				// attack player
+                // attack player
             }
-            else if (IsInRange(Player.main.position, rangePlayerDetect))
+            else if (IsInRange(Player.main.position, rangePlayerDetect)) //if the player is in range of view chase player
             {
 				// chase player
 				newPos += (Player.main.position - position).Normalize() * moveSpeed * Time.deltaTime;

@@ -13,12 +13,12 @@ namespace Runesole
 
         void Start()
         {
+            //sets the stats of the enemy at the start of the game
             maxHealth = 10f;
             health = 10f;
             attackDmg = 1f;
 			moveSpeed = 8f;
-			attackRange = 1;
-
+            attackRange = 1;
         }
 
         void Update()
@@ -27,11 +27,11 @@ namespace Runesole
 
 			Vector2 newPos = position;
 
-			if (IsInRange(Player.main.position, attackRange - 0.1f))
+			if (IsInRange(Player.main.position, attackRange - 0.1f)) //if the player is in attack range, attack player
             {
                 // attack player
             }
-            else if (IsInRange(Player.main.position, rangePlayerDetect))
+            else if (IsInRange(Player.main.position, rangePlayerDetect)) //if the player is in view range of melee enemy, chase player
             {
 				// chase player
 				newPos += (Player.main.position - position).Normalize() * moveSpeed * Time.deltaTime;
