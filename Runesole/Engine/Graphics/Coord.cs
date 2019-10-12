@@ -14,8 +14,14 @@ namespace Runesole.Engine.Graphics
 	// A console cordinated (x = column, y = row)
 	struct Coord
 	{
+		
+		// ## PUBLIC MEMBERS ##
+
 		public int x;
 		public int y;
+
+
+		// ## STATIC DEFINITIONS ## // used to reduce the size of code & improve readability
 
 		// Coord for top left of screen
 		public static Coord TopLeft {
@@ -45,36 +51,37 @@ namespace Runesole.Engine.Graphics
 			}
 		}
 
+		// Coord to move up one screen pixel
 		public static Coord Up {
 			get {
 				return new Coord(0, -1);
 			}
 		}
 
+		// Coord to move down one screen pixel
 		public static Coord Down {
 			get {
 				return new Coord(0, 1);
 			}
 		}
 
+		// Coord to move left one screen pixel
 		public static Coord Left {
 			get {
 				return new Coord(-1, 0);
 			}
 		}
 
+		// Coord to move right one screen pixel
 		public static Coord Right {
 			get {
 				return new Coord(1, 0);
 			}
 		}
 
-		public static Coord zero {
-			get {
-				return new Coord(0, 0);
-			}
-		}
 
+
+		// ## OPERATOR DEFINITIONS ## // this allows for cleaner code
 
 
 		public static Coord operator +(Coord c1, Coord c2)
@@ -93,6 +100,8 @@ namespace Runesole.Engine.Graphics
 		{
 			return new Coord(c.x / n, c.y / n);
 		}
+
+		// ## CONSTRUCTOR ##
 
 		public Coord(int x, int y)
 		{

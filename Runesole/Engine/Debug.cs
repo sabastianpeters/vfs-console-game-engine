@@ -24,7 +24,7 @@ namespace Runesole.Engine
 
 		public static void Log (string s)
 		{
-			UI.String(Coord.BottomLeft + (Coord.Up * currentLine++), s, Color.Forground.White, Color.Background.Black);
+			UI.StringLeft(Coord.BottomLeft + (Coord.Up * currentLine++), s, Color.Foreground.White, Color.Background.Black);
 		}
 	}
 }
