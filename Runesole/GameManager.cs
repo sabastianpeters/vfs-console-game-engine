@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 using Runesole.Engine;
+using Runesole.Engine.Graphics;
 
 /*
 	Copyright (C) 2019 Sabastian Peters, Yuya Yoshino
@@ -10,66 +11,72 @@ using Runesole.Engine;
 
 namespace Runesole
 {
-    static class GameManager
-    {
+	// A utility class to generally manage the game
+	static class GameManager
+	{
 
-        private static int timeOfDay = 0;       ///used to keep track of time
-        private static int dayLength = 120;       ///full day is 120 seconds
-        private static int daytimeLength = 70;   ///day is 70 seconds
+		// ## PUBLIC MEMBERS ##
 
-        // What world to draw and camera to use (public so Main() can access)
-        public static World world;
-        public static Camera camera;
-        public static bool IsPaused { get; private set; }
+		// What world to draw and camera to use (public so Main() can access)
+		public static World world;		/// current world rendering (this allows for multiple)
+		public static Camera camera;	/// current camera to render (allows for multiple)
+		public static bool IsPaused { get; private set; }
+        
 
+        // ## PRIVATE MEMBERS ##
 
-        // Different worlds
+		private static Player m_player;
         private static World m_mainWorld;
-        private static Player m_player;
+        private static int timeOfDay = 0;       ///used to keep track of time
+        private static int dayLength = 120;     ///full day is 120 seconds
+        private static int daytimeLength = 70;  ///day is 70 seconds
 
-        /// Called at start of program
-        public static void Start()
-        {
-            //at the start of the game create new player and set camera to player
-            m_player = new Player();
-            camera = new Camera();
 
-            //spawn player at the center of the map
-            m_player.position = new Vector2(80, 40);
+
+
+		// ## PUBLIC ENGINE METHODS ##
+
+		/// Called at start of program
+		public static void Start ()
+		{
+			//at the start of the game spawns new player and set camera to player
+			m_player = new Player();
+			SpawnPlayer();
+			camera = new Camera();
 
             //create the world
             CreateWorlds();
 
             //spawn new enemies on the map
             EnemyManager.SpawnEnemies();
-
-            m_player.OnDeath += () =>
-            {
-                //ask user if they want to restart
-
-                //if(/*input is yes*/ == "yes")
-                //{
-                //    m_player = new Player();
-                //}
-            };
         }
 
 
-        /// Called at begining of each frame
-        public static void Update()
-        {
-            DaytimeLogic();
+		/// Called at begining of each frame
+		public static void Update ()
+		{
+			// if player is dead, press repawn button to respawn
+			if(m_player.IsDead)
+			{
+				Debug.Log("Press "+Controls.respawnPlayer.ToString()+" to respawn player");
+            
 
-            if (Input.GetKeyDown(Controls.pauseGame))
-                TogglePause();
+				if (Input.GetKeyDown(Controls.respawnPlayer))
+				{
+					SpawnPlayer();
+				}
+			}
 
-            if (IsPaused)
-                Debug.Log("Game is paused");
-
-            PlayerUI.Draw(m_player);
-
-        }
-
+            DaytimeLogic(); 
+            
+			// lets user know game is paused
+			if (IsPaused)
+				Debug.Log("Game is paused");
+			
+            // draws player ui
+			PlayerUI.Draw(m_player);
+		}
+        
         public static void DaytimeLogic()
         {
             timeOfDay = (int)Time.time % dayLength;
@@ -94,7 +101,51 @@ namespace Runesole
 			Debug.Draw();
 		}
 
-        private static void CreateWorlds()
+
+
+
+		// ## PUBLIC METHODS ##
+
+		// Toggles if the game is paused and returns if the game was resumed
+		public static bool TogglePause()
+		{
+			if (IsPaused)
+				UnpauseGame();
+			else
+				PauseGame();
+
+			return IsPaused;
+		}
+
+		// Pauses the game
+		public static void PauseGame()
+		{
+			IsPaused = true;
+			Time.timeScale = 0;
+		}
+
+		// Unpauses the game
+		public static void UnpauseGame()
+		{
+			IsPaused = false;
+			Time.timeScale = 1;
+		}
+
+
+		// spawn player - ideally this would be in living entity
+		public static void SpawnPlayer()
+		{
+			m_player.ResetHealth();
+			m_player.position = new Vector2(80, 40); ///spawn player at the center of the map
+		}
+
+
+
+
+		// ## PRIVATE UTILITY VARIABLES ##
+
+		// creates all worlds to be used in game // if there was more than 1 map & map gen was more complex, a class would be needed
+		private static void CreateWorlds()
         {
             int width = 160;
             int height = 80;
@@ -124,13 +175,13 @@ namespace Runesole
                 WorldBlock.grass1,
                 WorldBlock.grass2);
 
-            //create the room on the map
             CreateRoom();
 
             world = m_mainWorld;
         }
 
-        private static void CreateRoom()
+		//create the room on the map at a random position
+		private static void CreateRoom()
         {
             //generates a room randomly in the world
             int posX = Random.Range(25, 135);
@@ -141,31 +192,5 @@ namespace Runesole
             m_mainWorld.SetBlockAt(posX, posY + 3, WorldBlock.door);
             m_mainWorld.SetBlockAt(posX, posY + 4, WorldBlock.door);
         }
-
-
-		// Toggles if the game is paused and returns if the game was resumed
-		public static bool TogglePause ()
-		{
-			if(IsPaused)
-				UnpauseGame();
-			else
-				PauseGame();
-
-			return IsPaused;
-		}
-
-		// Pauses the game
-		public static void PauseGame ()
-		{
-			IsPaused = true;
-			Time.timeScale = 0;
-		}
-
-		// Unpauses the game
-		public static void UnpauseGame ()
-		{
-			IsPaused = false;
-			Time.timeScale = 1;
-		}
 	}
 }

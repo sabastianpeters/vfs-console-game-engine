@@ -13,31 +13,27 @@ namespace Runesole.Engine
 {
 	class Camera
 	{
-		
-		public Vector2 position;
-		public static Camera main { get; private set; }
-		
-		private Bounds cullBounds; /// the bounds for what to try and draw
 
-		public void Update ()
-		{
-			cullBounds.x = position.x - ConsoleRenderer.Width / 2; 
-			cullBounds.y = position.y + ConsoleRenderer.Height / 2;
-			cullBounds.width = ConsoleRenderer.Width;
-			cullBounds.height = ConsoleRenderer.Height;
-		}
+		// ## PUBLIC FIELDS ##
+		public static Camera main { get; private set; }
+		public Vector2 position;
 		
+
+		// ## PUBLIC METHODS ##
 		
+		// draws a sprite at the given screen pos
 		public void Draw(float x, float y, Sprite sprite)
 		{
 			sprite.Draw(WorldtoScreen(x, y));
 		}
 
+		// Takes a world vector2 and turns it into screen coord // ideally would have ScreenToWorld too
 		public Coord WorldtoScreen(Vector2 target)
 		{
 			return WorldtoScreen(target.x, target.y);
 		}
 
+		// Takes a world (x, y) and turns it into screen coord
 		public Coord WorldtoScreen (float x, float y)
 		{
 			return new Coord(
@@ -47,10 +43,11 @@ namespace Runesole.Engine
 		}
 
 
+
+		// ## CONSTRUCTOR ##
+
 		public Camera ()
 		{
-			cullBounds = new Bounds(0, 0, 0, 0);
-
 			if (main == null)
 				main = this; // if a main camera doesn't exist, set it here
 		}

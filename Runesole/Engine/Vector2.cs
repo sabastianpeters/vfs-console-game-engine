@@ -11,12 +11,17 @@ using System.Threading.Tasks;
 
 namespace Runesole.Engine
 {
+	
+	// 2 Dimensional Vector Struct
 	struct Vector2
 	{
+		
+		// ## PUBLIC MEMBERS ##
 		public readonly float x;
 		public readonly float y;
+		
 
-		// ## comonly used vectors ##
+		// ## PUBLIC UTILITY PROPERTIES ## // these are values retrieved often, defining here means shorter code
 
 		// Vector (0, 0)
 		public static Vector2 zero { get { 
@@ -49,12 +54,8 @@ namespace Runesole.Engine
 		} }
 
 
-		// basic constructor
-		public Vector2(float x, float y)
-		{
-			this.x = x;
-			this.y = y;
-		}
+
+		// ## VECTOR MATH FUNCTIONS ##
 
 		// Squared distance between 2 vectors (faster than Distance())
 		public static float SqrDistance(Vector2 v1, Vector2 v2)
@@ -70,11 +71,14 @@ namespace Runesole.Engine
 			return Mathf.Sqrt(SqrDistance(v1, v2));
 		}
 
+		// Returns this vector with a magnitude of 1
 		public Vector2 Normalize ()
 		{
 			return this / Vector2.Distance(Vector2.zero, this);
 		}
 
+
+		// ## OPERATOR OVERLOADING ## // makes code significantly more readable
 
 		public static Vector2 operator +(Vector2 v1, Vector2 v2)
 		{
@@ -93,9 +97,21 @@ namespace Runesole.Engine
 			return new Vector2(v.x / n, v.y / n);
 		}
 
+
+		// overrides ToString() to provide more info
 		public override string ToString()
 		{
 			return $"Vector2({x}, {y})";
+		}
+
+
+
+		// ## CONSTRUCTOR ##
+		
+		public Vector2(float x, float y)
+		{
+			this.x = x;
+			this.y = y;
 		}
 	}
 }

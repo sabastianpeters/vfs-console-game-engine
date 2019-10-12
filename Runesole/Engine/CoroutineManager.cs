@@ -5,6 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+/*
+	Copyright (C) 2019 Sabastian Peters, Yuya Yoshino
+*/
+
 namespace Runesole.Engine
 {
 	static class CoroutineManager
@@ -65,9 +70,5 @@ namespace Runesole.Engine
 		{
 			coroutineList.Remove(coroutine); /// removes the coroutine instance
 		}
-
-
-
-		// ## PRIVATE METHODS ##
 	}
 }

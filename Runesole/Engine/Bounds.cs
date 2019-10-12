@@ -10,13 +10,19 @@ using System.Threading.Tasks;
 
 namespace Runesole.Engine
 {
+	// A class to represent a square bounding box
 	class Bounds
 	{
+		// ## PUBLIC MEMBER ##
 		public float x;
 		public float y;
 		public float width;
 		public float height;
 
+
+		// ## UTILITY PROPERTIES ##
+
+		// property to get and set position (based on top left) of box
 		public Vector2 position {
 			get {
 				return new Vector2(x, y);
@@ -27,6 +33,7 @@ namespace Runesole.Engine
 			}
 		}
 
+		// get and set the position of this bound's left side
 		public float left {
 			get {
 				return x;
@@ -34,18 +41,20 @@ namespace Runesole.Engine
 			set {
 				width -= value - y; /// removes from height the distance between old x and new x
 				x = value;
-				Fix();
+				_Fix();
 			}
 		}
+		// get and set the position of this bound's right side
 		public float right {
 			get {
 				return x + width;
 			}
 			set {
 				width = value - x;
-				Fix();
+				_Fix();
 			}
 		}
+		// get and set the position of this bound's top side
 		public float top {
 			get {
 				return y;
@@ -53,35 +62,30 @@ namespace Runesole.Engine
 			set {
 				height -= value - y; /// removes from height the distance between old y and new y
 				y = value;
-				Fix();
+				_Fix();
 			}
 		}
+		// get and set the position of this bound's bottom side
 		public float bottom {
 			get {
 				return y - height;
 			}
 			set {
 				height = value - y;
-				Fix();
+				_Fix();
 			}
 		}
 
-		/// takes in vectors and uses their x & y components to create bounds
-		public Bounds (Vector2 position, Vector2 size) : this(position.x, position.y, size.x, size.y) {}
 
-		public Bounds (float x, float y, float width, float height)
-		{
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
-		}
+		// ## PUBLIC METHODS ##
 
+		// Returns if bounds intersects with given position (vector2)
 		public bool Intersects (Vector2 position)
 		{
 			return Intersects(position.x, position.y);
 		}
 
+		// Returns if bounds intersects with given position (x & y)
 		public bool Intersects (float x, float y)
 		{
 			return
@@ -89,8 +93,12 @@ namespace Runesole.Engine
 				(bottom < y && y < top);		// inside height
 		}
 
+
+
+		// ## PRIVATE UTILITY METHODS ##
+
 		// removes any negative comonents
-		public void Fix ()
+		private void _Fix ()
 		{
 			// sets x to where width is and makes width positive
 			if(width < 0)
@@ -104,6 +112,19 @@ namespace Runesole.Engine
 				y -= height;
 				height = -height;
 			}
+		}
+
+
+		// ## CONSTRUCTORS ##
+
+		/// takes in vectors and uses their x & y components to create bounds
+		public Bounds(Vector2 position, Vector2 size) : this(position.x, position.y, size.x, size.y) { }
+		public Bounds(float x, float y, float width, float height)
+		{
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
 		}
 	}
 }
