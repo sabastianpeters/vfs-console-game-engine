@@ -14,22 +14,36 @@ namespace Runesole.Engine.Graphics
 {
 	static class ConsoleRenderer
 	{
-		private static char[][] buffer;			// a buffer of what to draw at end of frame
-		private static Color.Forground[][] fgColorbuffer;	// foreground color buffer
-		private static Color.Background[][] bgColorbuffer;	// background color buffer
-		private static StreamWriter stream;	// console output (more control)
 
-		public static int Width { get; private set; }	/// width of console renderer in columns
+		// ## PUBLIC MEMBERS ##
+
+		public static int Width { get; private set; }   /// width of console renderer in columns
 		public static int Height { get; private set; }  /// height of console renderer in rows
 
 
-		private const char borderChar = '░';    /// what character do we surround screen with?
-		private const Color.Forground borderFG = Color.Forground.DarkGray;			/// border foreground
-		private const Color.Background borderBG = Color.Background.Black;	/// border background
-		private static string borderString;	/// string pf 1 cell of border
-		private static string borderRow;	/// string of 1 row of border char w/ styling
+		// ## PRIVATE MEMBERS ##
+
+		// Buffer
+		private static char[][] buffer;			// a buffer of what to draw at end of frame
+		private static Color.Foreground[][] fgColorbuffer;	// foreground color buffer
+		private static Color.Background[][] bgColorbuffer;	// background color buffer
+
+		// Console
+		private static string borderStringCol;	/// string pf 1 cell of border
+		private static string borderStringRow;	/// string of 1 row of border char w/ styling
+		private static StreamWriter stream; /// console output (more control)
 
 
+		// ## CONST UTILITY VARIABLES ## // make it easier to change values
+		private const char BORDER_CHAR = '░';                                   /// what character do we surround screen with?
+		private const Color.Foreground BORDER_FG = Color.Foreground.DarkGray;   /// border foreground
+		private const Color.Background BORDER_BG = Color.Background.Black;      /// border background
+
+
+
+		// ## PUBLIC METHODS ##
+
+		// Updates the Renderer and prepares it to be used for the frame
 		public static void Update ()
 		{
 			Console.CursorVisible = false; /// prevents users from seeing cursor drawing
@@ -38,7 +52,7 @@ namespace Runesole.Engine.Graphics
 
 			// Initializes array of rows
 			buffer = new char[Height][];
-			fgColorbuffer = new Color.Forground[Height][];
+			fgColorbuffer = new Color.Foreground[Height][];
 			bgColorbuffer = new Color.Background[Height][];
 
 
@@ -47,14 +61,14 @@ namespace Runesole.Engine.Graphics
 				
 				// Initializes each row
 				buffer[row] = new char[Width];
-				fgColorbuffer[row] = new Color.Forground[Width];
+				fgColorbuffer[row] = new Color.Foreground[Width];
 				bgColorbuffer[row] = new Color.Background[Width];
 
 				// sets defualt values to each position
 				for (int column = 0; column < buffer[row].Length; column++)
 				{
 					buffer[row][column] = ' ';
-					fgColorbuffer[row][column] = Color.Forground.Red;
+					fgColorbuffer[row][column] = Color.Foreground.Red;
 					bgColorbuffer[row][column] = Color.Background.Black;
 				}
 			}
@@ -62,9 +76,9 @@ namespace Runesole.Engine.Graphics
 		}
 
 		// sets the forground color at given position
-		public static void SetColor (int x, int y, Color.Forground fgColor)
+		public static void SetColor (int x, int y, Color.Foreground fgColor)
 		{
-			if (fgColor == Color.Forground.None)
+			if (fgColor == Color.Foreground.None)
 				return; /// doesn't set color if none is provided
 			fgColorbuffer[y][x] = fgColor;
 		}
@@ -87,59 +101,61 @@ namespace Runesole.Engine.Graphics
 		// Render to console, row by row
 		public static void Render()
 		{
+			// doesn't render if no width or height - Console.SetCursorPosition(0, 0) crashed program otherwise
+			if(Width <= 0 || Height <= 0)
+				return;
+
 			Console.SetCursorPosition(0, 0); /// draws from top-left
-			Console.WriteLine(borderRow); /// draws top border
+			Console.WriteLine(borderStringRow); /// draws top border
 
 			StringBuilder rowOutput = new StringBuilder(); // output of each row
 
+			// runs through each row in buffer (like old tvs)
 			for (int row = 0; row < buffer.Length; row++)
 			{
 				
-				rowOutput.Append(borderString); /// draws left border
+				rowOutput.Append(borderStringCol); /// draws left border
 
-				/// adds row content to row output
+				/// adds buffer row to row output
 				for (int col = 0; col < buffer[row].Length; col++)
 				{
-					rowOutput.Append("\u001b[");
-					rowOutput.Append((int)bgColorbuffer[row][col]);
-					rowOutput.Append(";");
-					rowOutput.Append((int)fgColorbuffer[row][col]);
-					rowOutput.Append("m");
-					rowOutput.Append(buffer[row][col]); /// draws the characters with specified fg and bg color
+					/// draws the characters with specified fg and bg color
+					rowOutput.Append("\u001b[");					/// ansi unicode start indicator
+					rowOutput.Append((int)bgColorbuffer[row][col]);	/// ansi background color
+					rowOutput.Append(";");							/// ansi seperator
+					rowOutput.Append((int)fgColorbuffer[row][col]);	/// ansi foreground color
+					rowOutput.Append("m");							/// ansi unicode end indicator
+					rowOutput.Append(buffer[row][col]);				/// draws the character
                 }
 
+				rowOutput.Append(borderStringCol); /// draws right border
 
-				rowOutput.Append(borderString); /// draws right border
 
 				// writes row
 				Console.WriteLine(rowOutput.ToString());
-				
 				rowOutput.Clear(); /// clears row output for next use
 			}
 
-			Console.Write(borderRow); /// draws bottom border
-
-			stream.Flush();
+			Console.Write(borderStringRow); /// draws bottom border
+			stream.Flush(); /// redraws screen
 		}
 
 
 
 
+		// ## PRIVATE UTILITY METHODS ##
 
-
-
-
-
-
-
-
+		// updates the size of the buffer
 		private static void _UpdateSize ()
 		{
-			//Console.SetWindowSize(130, 50);
+			/// sets console buffer (what we can draw to) to max size
+			/// updating it each frame to match window size will crash program 
+			/// as buffer can't change fast enough and console doesn't allow smaller buffers (crash)
 			Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
-			Width = Console.WindowWidth - 2;
-			Height = Console.WindowHeight - 2;
+			// sets renderer buffers to be slightly smaller that console window
+			Width = Console.WindowWidth - 4;
+			Height = Console.WindowHeight - 3;
 
 			// prevents height or width from being negative
 			if(Height < 0)
@@ -148,30 +164,21 @@ namespace Runesole.Engine.Graphics
 				Width = 0;
 
 			// update border string
-			string stylePrefix = $"\u001b[{(int)borderBG};{(int)borderFG}m";
-			borderString = stylePrefix + borderChar;
-			borderRow = stylePrefix + new String(borderChar, Console.WindowWidth);
-
-			/*
-			// ensures window doesn't become larger than the maximum buffer
-			Console.SetWindowSize(130, 50);
-			Console.SetBufferSize(130, 50);
-
-			Width = Console.WindowWidth - 2;
-			Height = Console.WindowHeight - 2;
-			*/
+			string stylePrefix = $"\u001b[{(int)BORDER_BG};{(int)BORDER_FG}m";				/// ansi border styling
+			borderStringCol = stylePrefix + BORDER_CHAR + BORDER_CHAR;						/// sets vertical border string
+			borderStringRow = stylePrefix + new String(BORDER_CHAR, Console.WindowWidth);	/// sets horizontal border string
 		}
 
 
 
-
+		// ## INTITIALIZING ## // Gives more control over when this is called compared to a static constructor
 		
 		public static void Init()
 		{
+			// Creates a custom steam to write to (allows for control over refresh using .Flush())
 			stream = new StreamWriter(Console.OpenStandardOutput());
 			stream.AutoFlush = false;
 			Console.SetOut(stream);
-			//Console.OutputEncoding = Encoding.GetEncoding(28591);
 			Console.OutputEncoding = Encoding.UTF8;
 
 			_UpdateSize();

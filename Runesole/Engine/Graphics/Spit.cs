@@ -9,60 +9,47 @@ using System.Threading.Tasks;
 	Copyright (C) 2019 Sabastian Peters, Yuya Yoshino
 */
 
+// NOTE: A spit is inbetween a sprite and a pixel. Pixels make up spits, and spits makeup sprites
 
 namespace Runesole.Engine.Graphics
 {
-
-	// A spit is inbetween a sprite and a pixel. Pixels make up spits, and spits makeup sprites
-	// Spit (TM) 2019 Yuya Yoshino, Sabastian Peters
-
 	// A char with color information
 	struct Spit
 	{
-		public char character;	/// the char to draw
-		public Color.Forground forgroundColor;
-		public Color.Background backgroundColor;
+		
+		// ## PUBLIC MEMBERS ##
+		public char character;						/// the char to draw (foreground color)
+		public Color.Foreground foregroundColor;	/// foreground color
+		public Color.Background backgroundColor;	/// background color
 
-		private const Color.Forground defaultForgroundColor = Color.Forground.White;
-		private const Color.Background defaultBackgroundColor = Color.Background.None;
 
+		// ## UTILITY CONST VALUES ## // default const values for easy modification later
+		private const Color.Foreground DEFAULT_FG = Color.Foreground.White;
+		private const Color.Background DEFAULT_BG = Color.Background.None;
+
+
+		// ## PUBLIC METHODS ##
+
+		// draws the spit at the given coordinates
 		public void Draw (int x, int y)
 		{
+			// sets data of the 3 buffers at provided coords with spit data
 			ConsoleRenderer.SetChar(x, y, character);
-			ConsoleRenderer.SetColor(x, y, forgroundColor);
+			ConsoleRenderer.SetColor(x, y, foregroundColor);
 			ConsoleRenderer.SetColor(x, y, backgroundColor);
 		}
 
-		// Various constructors to create a spit with different params
 
-		public Spit (char c)
+		// ## CONSTRUCTORS ## // various constructors allows a spit to be created with many different params, they all end up calling the last constructor
+
+		public Spit (char c) : this(c, DEFAULT_FG, DEFAULT_BG) { }
+		public Spit(char c, Color.Foreground fgColor) : this(c, fgColor, DEFAULT_BG) { }
+		public Spit(char c, Color.Background bgColor) : this(c, DEFAULT_FG, bgColor) { }
+		public Spit(char c, Color.Background bgColor, Color.Foreground fgColor) : this(c, fgColor, bgColor) { }
+		public Spit(char c, Color.Foreground fgColor, Color.Background bgColor)
 		{
 			this.character = c;
-			this.forgroundColor = defaultForgroundColor;
-			this.backgroundColor = defaultBackgroundColor;
-		}
-
-		public Spit(char c, Color.Forground fgColor)
-		{
-			this.character = c;
-			this.forgroundColor = fgColor;
-			this.backgroundColor = defaultBackgroundColor;
-		}
-
-		public Spit(char c, Color.Background bgColor)
-		{
-			this.character = c;
-			this.forgroundColor = defaultForgroundColor;
-			this.backgroundColor = bgColor;
-		}
-
-
-		public Spit(char c, Color.Background bgColor, Color.Forground fgColor) : this(c, fgColor, bgColor) { }
-
-		public Spit(char c, Color.Forground fgColor, Color.Background bgColor)
-		{
-			this.character = c;
-			this.forgroundColor = fgColor;
+			this.foregroundColor = fgColor;
 			this.backgroundColor = bgColor;
 		}
 

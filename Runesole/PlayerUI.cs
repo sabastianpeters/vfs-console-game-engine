@@ -13,42 +13,42 @@ namespace Runesole
         public static void Draw(Player player)
         {
             //player level 
-            UI.String(
+            UI.StringLeft(
                 Coord.TopLeft + Coord.Down + Coord.Right * 2,
-                "Level: " + player.level, ///TODO make yellow, background black
-                Color.Forground.Magenta,
+                "Level: " + player.level,
+                Color.Foreground.Magenta,
                 Color.Background.Black
             );
 
             //player health
-            UI.String(
+            UI.StringLeft(
                 Coord.TopLeft + Coord.Down * 2 + Coord.Right *2, 
-                "Health: " + Mathf.FloorToInt(player.health) + " / " + Mathf.FloorToInt(player.maxHealth), /// TODO make green, background black
-                Color.Forground.Green,
+                "Health: " + Mathf.FloorToInt(player.health) + " / " + Mathf.FloorToInt(player.maxHealth),
+                Color.Foreground.Green,
                 Color.Background.Black
             );
 
             //player exp
-            UI.String(
+            UI.StringLeft(
                 Coord.TopLeft + Coord.Down * 3 + Coord.Right * 2, 
-                "Exp: " + Mathf.FloorToInt(player.experience) + " / " + Mathf.CeilToInt(player.maxExperience), ///TODO make yellow, background black
-                Color.Forground.Yellow,
+                "Exp: " + Mathf.FloorToInt(player.experience) + " / " + Mathf.CeilToInt(player.maxExperience),
+                Color.Foreground.Yellow,
                 Color.Background.Black
             );
 
             //player damage
-            UI.String(
+            UI.StringLeft(
                 Coord.TopLeft + Coord.Down * 4 + Coord.Right * 2,
-                "Str: " + player.attackDmg, ///TODO make yellow, background black
-                Color.Forground.Red,
+                "Str: " + player.attackDmg,
+                Color.Foreground.Red,
                 Color.Background.Black
             );
 
             //player dead or alive indicator
-            UI.String(
+            UI.StringLeft(
 				Coord.TopLeft + Coord.Down * 5 + Coord.Right * 2,
-				(player.IsDead ? "U dead" : "u good"), ///TODO make yellow, background black
-				player.IsDead ? Color.Forground.BrightRed : Color.Forground.BrightGreen,
+				(player.IsDead ? "U dead" : "u good"),
+				player.IsDead ? Color.Foreground.BrightRed : Color.Foreground.BrightGreen,
 				Color.Background.Black
 			);
 		}
