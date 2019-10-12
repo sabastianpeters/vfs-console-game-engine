@@ -10,28 +10,32 @@ using Runesole.Engine;
 
 namespace Runesole
 {
-	static class GameManager
-	{
+    static class GameManager
+    {
 
-		// What world to draw and camera to use (public so Main() can access)
-		public static World world;
-		public static Camera camera;
-		public static bool IsPaused { get; private set; }
+        private static int timeOfDay = 0;       ///used to keep track of time
+        private static int dayLength = 120;       ///full day is 120 seconds
+        private static int daytimeLength = 70;   ///day is 70 seconds
+
+        // What world to draw and camera to use (public so Main() can access)
+        public static World world;
+        public static Camera camera;
+        public static bool IsPaused { get; private set; }
 
 
         // Different worlds
         private static World m_mainWorld;
-		private static Player m_player;
+        private static Player m_player;
 
-		/// Called at start of program
-		public static void Start ()
-		{
+        /// Called at start of program
+        public static void Start()
+        {
             //at the start of the game create new player and set camera to player
-			m_player = new Player();
-			camera = new Camera();
+            m_player = new Player();
+            camera = new Camera();
 
             //spawn player at the center of the map
-			m_player.position = new Vector2(80,40);
+            m_player.position = new Vector2(80, 40);
 
             //create the world
             CreateWorlds();
@@ -39,29 +43,50 @@ namespace Runesole
             //spawn new enemies on the map
             EnemyManager.SpawnEnemies();
 
-            m_player.OnDeath += () => 
+            m_player.OnDeath += () =>
             {
                 //ask user if they want to restart
 
-                if(/*input is yes*/ == "yes")
-                {
-                    m_player = new Player();
-                }
+                //if(/*input is yes*/ == "yes")
+                //{
+                //    m_player = new Player();
+                //}
             };
         }
 
 
-		/// Called at begining of each frame
-		public static void Update ()
-		{
-			if(Input.GetKeyDown(Controls.pauseGame))
-				TogglePause();
+        /// Called at begining of each frame
+        public static void Update()
+        {
+            DaytimeLogic();
 
-			if(IsPaused)
-				Debug.Log("Game is paused");
-				
-			PlayerUI.Draw(m_player);
-		}
+            if (Input.GetKeyDown(Controls.pauseGame))
+                TogglePause();
+
+            if (IsPaused)
+                Debug.Log("Game is paused");
+
+            PlayerUI.Draw(m_player);
+
+        }
+
+        public static void DaytimeLogic()
+        {
+            timeOfDay = (int)Time.time % dayLength;
+
+            if (timeOfDay < daytimeLength) //check time is day
+            {
+                // day time
+                Debug.Log("Daytime");
+                EnemyManager.SetDmgMulti(1f);
+            }
+            else //if not day set night
+            {
+                // night time
+                Debug.Log("Nighttime");
+                EnemyManager.SetDmgMulti(1.5f);
+            }
+        }
 
 		/// Called at end of each frame
 		public static void LateUpdate()
