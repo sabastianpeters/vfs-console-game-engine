@@ -24,7 +24,10 @@ namespace Runesole
 		public static List<GameObject> gameObjectList = new List<GameObject>();
 
 		private static List<GameObject> destroyGameObjectList = new List<GameObject>();
-		
+		private static List<GameObject> addingGameObjectList = new List<GameObject>();
+
+		private static bool shouldQueueAddedGameObjects = false;
+
 		private Action start;
 		private Action update;
 
@@ -32,6 +35,7 @@ namespace Runesole
 		{
 			foreach(GameObject gameObject in gameObjectList)
 				gameObject.start();
+			shouldQueueAddedGameObjects = true;
 		}
 
 		public static void __CallUpdateEvent()
@@ -59,6 +63,15 @@ namespace Runesole
 			}
 		}
 
+		public static void __AddGameObjects ()
+		{
+			/// while there are objects to add, add them
+			while (addingGameObjectList.Count > 0)
+			{
+				gameObjectList.Add(addingGameObjectList[0]); /// adds the gameobject to the list, so its drawn and updated
+				addingGameObjectList.RemoveAt(0);
+			}
+		}
 
 
 		/// Protected constructor (prevents external classes from creating gameobjects, but child classes can still be created)
@@ -72,7 +85,10 @@ namespace Runesole
 			_GetEvent("Update", out update);
 
 			// adds new game object to gameobject list
-			gameObjectList.Add(this);
+			if(shouldQueueAddedGameObjects)
+				addingGameObjectList.Add(this);
+			else
+				gameObjectList.Add(this);
 		}
 
 		private void _GetEvent (string methodName, out Action action)

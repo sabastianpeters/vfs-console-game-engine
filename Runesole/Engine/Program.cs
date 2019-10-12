@@ -45,9 +45,9 @@ namespace Runesole.Engine
 
 			// Game Setup
 			SpriteManager.GenerateSprites();	/// generates sprites
-			WorldBlock.Init();					/// generates world blocks
+			WorldBlock.Init();                  /// generates world blocks
 			GameManager.Start();				/// starts the game logic
-			GameObject.__CallStartEvent();		/// calls start event on all gameobjects
+			GameObject.__CallStartEvent();      /// calls start event on all gameobjects
 			Console.Clear();					/// clears the screen once everything is loaded
 
 			// while loop for each frame
@@ -72,7 +72,8 @@ namespace Runesole.Engine
 				Input.LateUpdate();
 				Time.LateUpdate();
 
-				// Destroys any gameobjects at end of frame
+				// Add and destroy any gameobjects at end of frame
+				GameObject.__AddGameObjects();      
 				GameObject.__DestroyGameObjects();
 			}
 

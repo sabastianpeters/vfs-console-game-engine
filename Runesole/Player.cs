@@ -23,6 +23,7 @@ namespace Runesole
 
         void Start()
 		{
+            //sets all stats at the beginning of the game
             level = 1;
             maxHealth = 15;
 			ResetHealth();
@@ -36,11 +37,16 @@ namespace Runesole
 
 		void Update ()
 		{
+            //update player every sec
             sprite = SpriteManager.player_idle; /// by default draws base player
-
-			Debug.Log("hey");
+			
+            //move
 			DoMovement();
+
+            //heal
 			RegenHealth();
+
+            //attack
 			DoAttack();
 
 			Camera.main.position = position;
@@ -49,7 +55,8 @@ namespace Runesole
 
         public void RegenHealth()
         {
-            Heal(Time.deltaTime * 1f);
+            //heals 0.1 * your level per second
+            Heal(Time.deltaTime * (0.1f*level));
         }
 
         void DoAttack()
@@ -60,13 +67,13 @@ namespace Runesole
 				Enemy enemy = EnemyManager.enemyList[i];
 
 				// Player attack
-				if (Input.GetKeyDown(Controls.attack) || Input.GetKey(Controls.attack))
+				if (Input.GetKeyDown(Controls.attack) || Input.GetKey(Controls.attack)) //checks for attack key input
 				{
 					sprite = SpriteManager.player_attack;
 					Attack(enemy);
 				}
 
-				if(!enemy.IsDead)
+				if(!enemy.IsDead) //checks if the enemy is dead if not, attack player
 				{
 					enemy.Attack(this); /// attack player
 				}
@@ -77,19 +84,19 @@ namespace Runesole
         {
             float x = 0, y = 0;
 
-            if (Input.GetKey(Controls.moveUp))
+            if (Input.GetKey(Controls.moveUp)) //if W key pressed move up
             {
                 y++;
             }
-            if (Input.GetKey(Controls.moveDown))
+            if (Input.GetKey(Controls.moveDown)) //if S key pressed move down
             {
                 y--;
             }
-            if (Input.GetKey(Controls.moveLeft))
+            if (Input.GetKey(Controls.moveLeft)) //if A key pressed move left
             {
                 x--;
             }
-            if (Input.GetKey(Controls.moveRight))
+            if (Input.GetKey(Controls.moveRight)) //if D key pressed move right
             {
                 x++;
             }
@@ -113,7 +120,7 @@ namespace Runesole
                 y *= Time.deltaTime * moveSpeed;
 
                 Vector2 newPos = new Vector2(position.x + x, position.y + y);
-				if(!GameManager.world.GetBlockAt(Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)).isCollidable)
+				if(CanWalkTo(newPos))
 				{
 					position = newPos;
 				}
@@ -135,7 +142,6 @@ namespace Runesole
         {
             level++;
             maxHealth += 2;
-            //health = maxHealth;
             attackDmg += 1;
             base.moveSpeed += 0.02f;
         }

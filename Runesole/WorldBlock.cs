@@ -18,11 +18,12 @@ namespace Runesole.Engine
 		public static WorldBlock stone;
 		public static WorldBlock grass1;
         public static WorldBlock grass2;
-        public static WorldBlock deepWaterBlock;
-        public static WorldBlock waterBlock; // deep water cant walk on
-        public static WorldBlock water; // water player can walk on
+        public static WorldBlock deepWaterBlock; // deep water you cant walk on
+        public static WorldBlock waterBlock; // water you cant walk on
+        public static WorldBlock water; // water you can walk on
         public static WorldBlock sand;
         public static WorldBlock cutGrass;
+        public static WorldBlock door;
 
         // Struct members
         public bool isCollidable;
@@ -47,7 +48,6 @@ namespace Runesole.Engine
 		// Initializes WorldBlocks (generates the block list)
 		public static void Init ()
 		{
-
 			stoneWall = new WorldBlock(
 				true,
 				new Spit('▒', Color.Forground.LightGray, Color.Background.DarkGray)
@@ -91,6 +91,11 @@ namespace Runesole.Engine
             grass2 = new WorldBlock(
                 false,
                 new Spit('/', Color.Forground.BrightGreen, Color.Background.Green)
+            );
+
+            door = new WorldBlock(
+                false,
+                new Spit(' ', Color.Background.Black)
             );
         }
 	}

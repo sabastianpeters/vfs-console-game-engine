@@ -70,6 +70,11 @@ namespace Runesole.Engine
 			return Mathf.Sqrt(SqrDistance(v1, v2));
 		}
 
+		public Vector2 Normalize ()
+		{
+			return this / Vector2.Distance(Vector2.zero, this);
+		}
+
 
 		public static Vector2 operator +(Vector2 v1, Vector2 v2)
 		{
@@ -86,6 +91,11 @@ namespace Runesole.Engine
 		public static Vector2 operator /(Vector2 v, float n)
 		{
 			return new Vector2(v.x / n, v.y / n);
+		}
+
+		public override string ToString()
+		{
+			return $"Vector2({x}, {y})";
 		}
 	}
 }
