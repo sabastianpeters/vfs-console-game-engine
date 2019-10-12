@@ -3,8 +3,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+	Copyright (C) 2019 Sabastian Peters, Yuya Yoshino
+*/
+
 namespace Runesole.Engine
 {
+	// Random Number Generator Class
 	static class Random
 	{
 		private static System.Random _rand;

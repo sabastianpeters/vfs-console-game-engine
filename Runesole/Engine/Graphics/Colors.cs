@@ -12,9 +12,10 @@ namespace Runesole.Engine.Graphics
 {
 	// ANSI Escape Codes: https://en.wikipedia.org/wiki/ANSI_escape_code
 
+	// a container class for ANSI Escape Codes
 	static class Color
 	{
-		public enum Forground
+		public enum Foreground
 		{
 			None = -1,
 			Black = 30,

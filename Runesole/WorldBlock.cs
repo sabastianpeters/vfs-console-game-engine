@@ -39,7 +39,7 @@ namespace Runesole.Engine
 		// An empty block
 		public static WorldBlock empty {
 			get {
-				return new WorldBlock(false, new Spit(' ', Color.Forground.None, Color.Background.None));
+				return new WorldBlock(false, new Spit(' ', Color.Foreground.None, Color.Background.None));
 			}
 		}
 
@@ -50,27 +50,27 @@ namespace Runesole.Engine
 		{
 			stoneWall = new WorldBlock(
 				true,
-				new Spit('▒', Color.Forground.LightGray, Color.Background.DarkGray)
+				new Spit('▒', Color.Foreground.LightGray, Color.Background.DarkGray)
 			);
 
             deepWaterBlock = new WorldBlock(
                 true,
-                new Spit(' ', Color.Forground.None, Color.Background.BrightBlue)
+                new Spit(' ', Color.Foreground.None, Color.Background.BrightBlue)
             );
 
             waterBlock = new WorldBlock(
                 true,
-                new Spit(' ', Color.Forground.None, Color.Background.Cyan)
+                new Spit(' ', Color.Foreground.None, Color.Background.Cyan)
             );
 
             water = new WorldBlock(
                 false,
-                new Spit(' ', Color.Forground.None, Color.Background.BrightCyan)
+                new Spit(' ', Color.Foreground.None, Color.Background.BrightCyan)
             );
 
             sand = new WorldBlock(
                 false,
-                new Spit(' ', Color.Forground.None, Color.Background.BrightYellow)
+                new Spit(' ', Color.Foreground.None, Color.Background.BrightYellow)
             );
 
             stone = new WorldBlock(
@@ -90,7 +90,7 @@ namespace Runesole.Engine
 
             grass2 = new WorldBlock(
                 false,
-                new Spit('/', Color.Forground.BrightGreen, Color.Background.Green)
+                new Spit('/', Color.Foreground.BrightGreen, Color.Background.Green)
             );
 
             door = new WorldBlock(

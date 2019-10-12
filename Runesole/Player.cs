@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +33,8 @@ namespace Runesole
 
 			if (main == null)
 				main = this; // if no main player, become the main one
+
+			CoroutineManager.Call(RegenHealth());
 		}
 
 		void Update ()
@@ -40,23 +42,27 @@ namespace Runesole
             //update player every sec
             sprite = SpriteManager.player_idle; /// by default draws base player
 			
-            //move
-			DoMovement();
-
-            //heal
-			RegenHealth();
-
-            //attack
-			DoAttack();
+			// only runs player controls when game isn't paused
+			if(!GameManager.IsPaused)
+			{
+				DoMovement();
+				RegenHealth();
+				DoAttack();
+			}
 
 			Camera.main.position = position;
+			
 
         }
 
-        public void RegenHealth()
+        public IEnumerator RegenHealth()
         {
-            //heals 0.1 * your level per second
-            Heal(Time.deltaTime * (0.1f*level));
+			while(true)
+			{
+				yield return new WaitForSeconds(1f);
+				Heal(level / 10f);
+				yield return null;
+			}
         }
 
         void DoAttack()
@@ -145,5 +151,18 @@ namespace Runesole
             attackDmg += 1;
             base.moveSpeed += 0.02f;
         }
-    }
+
+
+
+		public override void TakeDamage(float damage)
+		{
+			health -= damage;
+
+			//if the health of any entity is lower then 1, delete the entity 
+			if (health < 1f)
+			{
+				IsDead = true;
+			}
+		}
+	}
 }

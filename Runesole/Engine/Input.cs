@@ -16,36 +16,16 @@ namespace Runesole.Engine
 	static class Input
 	{
 		
+		// ## PRIVATE UTILITY MEMBERS ##
+
 		// Dictionary <key-code, is-pressed>
 		private static Dictionary<Key, bool> _lastKeysPressed;	/// what keys were pressed last frame
 		private static Dictionary<Key, bool> _keysPressed;      /// what keys are currently pressed
-		private static IEnumerator<Key> _keyEnumerator;
-
-		public static bool _isKeyPressed (Key key)
-		{
-			return (Keyboard.GetKeyStates(key) & KeyStates.Down) > 0;
-		}
-
-		public static void Update ()
-		{
-			
-			/// updates current list of keys pressed
-			_keyEnumerator.Reset();
-			while(_keyEnumerator.MoveNext())
-			{
-				Key key = _keyEnumerator.Current;
-				_keysPressed[key] = _isKeyPressed(key);
-			}
-		}
-
-		public static void LateUpdate ()
-		{
-			_lastKeysPressed = new Dictionary<Key, bool>(_keysPressed); /// pushes current key pressed to last key presses for next frame
-		}
+		private static IEnumerator<Key> _keyEnumerator;			/// a list of keys to enumerate over
 
 
 
-		// Public Utility Functions
+		// ## PUBLIC METHODS ##
 
 		public static bool  GetKeyDown (Key key)
 		{
@@ -64,11 +44,28 @@ namespace Runesole.Engine
 
 
 
+		// ## PUBLIC ENGINE METHODS ##
 
+		// run at start of frame
+		public static void Update()
+		{
 
+			/// updates current list of keys pressed
+			_keyEnumerator.Reset();
+			while (_keyEnumerator.MoveNext())
+			{
+				Key key = _keyEnumerator.Current;
+				_keysPressed[key] = _isKeyPressed(key);
+			}
+		}
 
+		// run at end of frame
+		public static void LateUpdate()
+		{
+			_lastKeysPressed = new Dictionary<Key, bool>(_keysPressed); /// pushes current key pressed to last key presses for next frame
+		}
 
-		
+		// initializes the input class
 		public static void Init ()
 		{
 			// Generates a list of keys to listen to
@@ -88,6 +85,15 @@ namespace Runesole.Engine
 			_lastKeysPressed = new Dictionary<Key, bool>(_keysPressed); /// creates a copy of dictionary for last keys pressed
 
 			
+		}
+
+
+		// ## PRIVATE UTILITY METHODS ##
+
+		// returns if a given key is currently pressed
+		private static bool _isKeyPressed(Key key)
+		{
+			return (Keyboard.GetKeyStates(key) & KeyStates.Down) > 0;
 		}
 	}
 }
