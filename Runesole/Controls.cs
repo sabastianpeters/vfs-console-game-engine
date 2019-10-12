@@ -13,14 +13,14 @@ namespace Runesole
 {
 	static class Controls
 	{
-		public static Key moveLeft = Key.A;
-		public static Key moveRight = Key.D;
-		public static Key moveUp = Key.W;
-		public static Key moveDown = Key.S;
-		
-		public static Key attack = Key.Up;
+		public static Key moveLeft = Key.A; //sets A to left move
+		public static Key moveRight = Key.D; //sets D to right move
+        public static Key moveUp = Key.W; //sets W to up move
+        public static Key moveDown = Key.S; //sets S to down move
+
+        public static Key attack = Key.Up; //sets Up to attack
 
 
-		public static Key snapCamera = Key.Space;
+        public static Key snapCamera = Key.Space; 
 	}
 }

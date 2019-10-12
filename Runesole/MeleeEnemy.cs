@@ -9,30 +9,39 @@ namespace Runesole
 {
     class MeleeEnemy : Enemy
     {
-        const float meleeMeleeAttack = 1f;
-        const float meleePlayerDetect = 10f;
+        float rangePlayerDetect = 20f;
 
         void Start()
         {
+            //sets the stats of the enemy at the start of the game
             maxHealth = 10f;
             health = 10f;
             attackDmg = 1f;
-
+			moveSpeed = 8f;
+            attackRange = 1;
         }
 
         void Update()
 		{
 			sprite = SpriteManager.enemy_melee;
 
-			if (IsInRange(Player.main.position, meleeMeleeAttack))
+			Vector2 newPos = position;
+
+			if (IsInRange(Player.main.position, attackRange - 0.1f)) //if the player is in attack range, attack player
             {
                 // attack player
             }
-            else if (IsInRange(Player.main.position, meleePlayerDetect))
+            else if (IsInRange(Player.main.position, rangePlayerDetect)) //if the player is in view range of melee enemy, chase player
             {
-                // chase player
-                position += (Player.main.position - position) * 2f * Time.deltaTime;
+				// chase player
+				newPos += (Player.main.position - position).Normalize() * moveSpeed * Time.deltaTime;
             }
+
+			// walk to new pos if we can
+			if (CanWalkTo(newPos))
+			{
+				position = newPos;
+			}
         }
 
         public override void TakeDamage(float damage)
