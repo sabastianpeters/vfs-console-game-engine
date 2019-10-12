@@ -33,14 +33,14 @@ namespace Runesole
 
             player_attack = new Sprite(3, 3, new Coord(1, 1));
             player_attack.SetSpit(1, 1, new Spit(' ', Color.Background.Blue));
-            player_attack.SetSpit(2, 1, new Spit('%', Color.Forground.BrightRed));
-            player_attack.SetSpit(2, 2, new Spit('%', Color.Forground.BrightRed));
-            player_attack.SetSpit(0, 0, new Spit('%', Color.Forground.BrightRed));
-            player_attack.SetSpit(0, 1, new Spit('%', Color.Forground.BrightRed));
-            player_attack.SetSpit(0, 2, new Spit('%', Color.Forground.BrightRed));
-            player_attack.SetSpit(1, 2, new Spit('%', Color.Forground.BrightRed));
-            player_attack.SetSpit(2, 0, new Spit('%', Color.Forground.BrightRed));
-            player_attack.SetSpit(1, 0, new Spit('%', Color.Forground.BrightRed));
+            player_attack.SetSpit(2, 1, new Spit('—', Color.Forground.BrightRed));
+            player_attack.SetSpit(2, 2, new Spit('\\', Color.Forground.BrightRed));
+            player_attack.SetSpit(0, 0, new Spit('\\', Color.Forground.BrightRed));
+            player_attack.SetSpit(0, 1, new Spit('—', Color.Forground.BrightRed));
+            player_attack.SetSpit(0, 2, new Spit('/', Color.Forground.BrightRed));
+            player_attack.SetSpit(1, 2, new Spit('|', Color.Forground.BrightRed));
+            player_attack.SetSpit(2, 0, new Spit('/', Color.Forground.BrightRed));
+            player_attack.SetSpit(1, 0, new Spit('|', Color.Forground.BrightRed));
 
 
             // Melee Enemy Sprites
