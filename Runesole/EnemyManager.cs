@@ -69,5 +69,13 @@ namespace Runesole
 				enemy.OnDeath += () => Player.main.AddExp(2f); ///when the enemy dies give player exp
 			}
         }
+
+        public static void SetDmgMulti(float multiplier)
+        {
+            foreach(Enemy enemy in enemyList)
+            {
+                enemy.damageMultiplier = multiplier; //changes the damage of all enemies when its night time
+            }
+        }
 	}
 }

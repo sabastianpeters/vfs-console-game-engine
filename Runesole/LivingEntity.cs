@@ -14,6 +14,7 @@ namespace Runesole
 		public float attackDmg = 1;
 		public float moveSpeed = 1;
 		public float attackRange = 1;
+        public float damageMultiplier = 1;
 
 		public event Action OnDeath;
 		public bool IsDead { get; private set; }
@@ -22,7 +23,7 @@ namespace Runesole
 		{
 			// if the target is in range of our attack range, attack them
 			if(target.IsInRange(position, attackRange))
-				target.TakeDamage(attackDmg);
+				target.TakeDamage(attackDmg*damageMultiplier);
 
 		}
 		public virtual void ResetHealth()

@@ -25,9 +25,8 @@ namespace Runesole
 		{
             //sets all stats at the beginning of the game
             level = 1;
-            maxHealth = 30;
+            maxHealth = 15;
 			ResetHealth();
-			health = 10;
             attackDmg = 2;
 			attackRange = 2f;
             moveSpeed = 7f;
@@ -60,7 +59,7 @@ namespace Runesole
 			while(true)
 			{
 				yield return new WaitForSeconds(1f);
-				health += level / 10;
+				health += level / 10f;
 				yield return null;
 			}
         }

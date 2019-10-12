@@ -13,7 +13,7 @@ namespace Runesole
 		{
 			// if the target is in range of our attack range, attack them
 			if (target.IsInRange(position, attackRange))
-				target.TakeDamage(attackDmg * Time.deltaTime);
+				target.TakeDamage(attackDmg * Time.deltaTime * damageMultiplier);
 		}
 	}
 }
