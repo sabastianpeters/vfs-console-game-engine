@@ -37,6 +37,16 @@ namespace Runesole
 
             //spawn new enemies on the map
             EnemyManager.SpawnEnemies();
+
+            m_player.OnDeath += () => 
+            {
+                //ask user if they want to restart
+
+                if(/*input is yes*/ == "yes")
+                {
+                    m_player = new Player();
+                }
+            };
         }
 
 		/// Called at begining of each frame
