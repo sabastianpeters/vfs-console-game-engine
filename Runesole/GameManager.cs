@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 using Runesole.Engine;
+using Runesole.Engine.Graphics;
 
 /*
 	Copyright (C) 2019 Sabastian Peters, Yuya Yoshino
@@ -43,10 +44,7 @@ namespace Runesole
             {
                 //ask user if they want to restart
 
-                if(/*input is yes*/ == "yes")
-                {
-                    m_player = new Player();
-                }
+               
             };
         }
 
@@ -54,10 +52,29 @@ namespace Runesole
 		/// Called at begining of each frame
 		public static void Update ()
 		{
-			if(Input.GetKeyDown(Controls.pauseGame))
-				TogglePause();
 
-			if(IsPaused)
+			if (Input.GetKeyDown(Controls.pauseGame))
+				//TogglePause();
+				UI.Prompt(
+					"hey", 
+					(option) => {
+						switch(option)
+						{
+							case 0:
+								world.SetBlockAt(50, 50, WorldBlock.door);
+								break;
+
+							case 1:
+								world.SetBlockAt(50, 50, WorldBlock.sand);
+								break;
+						}
+					},
+					"Yes",
+					"No"
+				);
+				
+
+			if (IsPaused)
 				Debug.Log("Game is paused");
 				
 			PlayerUI.Draw(m_player);

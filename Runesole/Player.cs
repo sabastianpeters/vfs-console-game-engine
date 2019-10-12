@@ -27,7 +27,7 @@ namespace Runesole
             level = 1;
             maxHealth = 30;
 			ResetHealth();
-			health = 10;
+			health = 31;
             attackDmg = 2;
 			attackRange = 2f;
             moveSpeed = 7f;
@@ -52,6 +52,7 @@ namespace Runesole
 			}
 
 			Camera.main.position = position;
+			
 
         }
 
@@ -60,7 +61,7 @@ namespace Runesole
 			while(true)
 			{
 				yield return new WaitForSeconds(1f);
-				health += level / 10;
+				Heal(level / 10f);
 				yield return null;
 			}
         }

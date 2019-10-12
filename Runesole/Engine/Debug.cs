@@ -19,7 +19,7 @@ namespace Runesole.Engine
 			
 			// Log player position & fps
 			Log($"Position: {Player.main.position.x}, {Player.main.position.y}");
-			Log($"{fps.value} FPS ({Time.deltaTime * 1000}ms)");
+			Log($"{fps.value} FPS ({Time.unscaledDeltaTime * 1000}ms)");
 		}
 
 		public static void Log (string s)

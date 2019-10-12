@@ -79,6 +79,13 @@ namespace Runesole.Engine.Graphics
 			}
 		}
 
+		// Coord to move right one screen pixel
+		public static Coord Center {
+			get {
+				return BottomRight / 2;
+			}
+		}
+
 
 
 		// ## OPERATOR DEFINITIONS ## // this allows for cleaner code

@@ -65,7 +65,8 @@ namespace Runesole.Engine.Graphics
 
 		// constructor to create a new empty sprite
 		public Sprite (int width, int height) : this(width, height, new Coord(0, 0)) { }
-		public Sprite (int width, int height, Coord origin)
+		public Sprite (int width, int height, Coord origin) : this(width, height, origin, new Spit(' ', Color.Foreground.None)) { }
+		public Sprite(int width, int height, Coord origin, Spit defaultSpit)
 		{
 			// sets values
 			this.origin = origin;
@@ -75,7 +76,7 @@ namespace Runesole.Engine.Graphics
 			/// inializes spit array with blank spaces
 			this.spitList = new Spit[width * (1 + height)];
 			for (int i = 0; i < spitList.Length; i++)
-				spitList[i] = new Spit(' ', Color.Foreground.None);
+				spitList[i] = defaultSpit;
 		}
 
 		// creates a sprite based on another 

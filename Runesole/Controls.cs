@@ -20,6 +20,8 @@ namespace Runesole
 
         public static Key attack = Key.Up; //sets Up to attack
 
+		public static Key navUp = Key.Escape;
+		public static Key navDown = Key.Escape;
 		public static Key pauseGame = Key.Escape;
 	}
 }
