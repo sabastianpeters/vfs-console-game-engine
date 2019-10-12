@@ -13,20 +13,27 @@ using System.Threading;
 
 namespace Runesole.Engine
 {
+	// A time utility class
 	static class Time
 	{
-		// Utility variables
+
+		// ## PRIVATE UTILITY VARIABLES ##
+
 		private static long _time;		/// real time in milliseconds (long)
 		private static long _lastTime;	/// real time last frame in milliseconds (long)
 		private static Stopwatch _stopwatch; /// stopwatch that keeps track of time
 
-		// Public properties
+
+		// ## PUBLIC PROPERTIES ##
+
 		public static float time { get; private set; }				/// in game time
 		public static float deltaTime { get; private set; }			/// in game delta time
 		public static float timeScale;								/// in game time scale
 		public static float unscaledTime { get; private set; }      /// real time
 		public static float unscaledDeltaTime { get; private set; } /// real delta time
 
+
+		// called at start of every frame
 		public static void Update ()
 		{
 			// updates real time variables
@@ -37,6 +44,7 @@ namespace Runesole.Engine
 			time += deltaTime;
 		}
 
+		// called at end of every frame
 		public static void LateUpdate()
 		{
 			unscaledDeltaTime = (_time - _lastTime) / 1000f;
@@ -46,7 +54,7 @@ namespace Runesole.Engine
 		}
 
 
-
+		// Initializes time class
 		public static void Init ()
 		{
 			// initialize variables

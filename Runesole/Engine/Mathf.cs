@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Runesole.Engine
 {
+	// Float Math Utility Class
 	static class Mathf
 	{
 

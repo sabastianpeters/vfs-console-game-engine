@@ -60,12 +60,7 @@ namespace Runesole.Engine.Graphics
 				_drawString(pos, s, fg, bg);
 			};
 		}
-
-		//// asks user for an input
-		//public static int Prompt (string question, params string[] options)
-		//{
-			
-		//}
+		
 
 
 		// ## PRIVATE UTITLITY METHODS ## // Things to make drawing easier

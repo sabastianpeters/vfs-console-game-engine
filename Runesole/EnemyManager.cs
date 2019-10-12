@@ -6,12 +6,16 @@ using Runesole.Engine;
 
 namespace Runesole
 {
-	class EnemyManager
+	// Utility Class to Manage Enemies in Scene
+	static class EnemyManager
 	{
-		public static List<Enemy> enemyList = new List<Enemy>();
+		// a list of enemies currently in the world
+		public static List<Enemy> enemyList = new List<Enemy>(); /// this should be private, but player needs to access it since I couldn't implement a collision system
 
 
-		// spawns in an enemy of specified type
+		// ## PUBLIC METHODS ##
+
+		// Spawns in enemy at position // using generics allows us to do things with enemy after spawning
 		public static EnemyType SpawnEnemy<EnemyType> (Vector2 spawnPos) where EnemyType: Enemy, new()
 		{
 			Enemy enemy = new EnemyType();
@@ -27,23 +31,13 @@ namespace Runesole
 			return (EnemyType)enemy;
 		}
 
+		// Spawns in enemy at (x, y)
 		public static EnemyType SpawnEnemy<EnemyType>(float spawnX, float spawnY) where EnemyType : Enemy, new()
 		{
 			return SpawnEnemy<EnemyType>(new Vector2(spawnX, spawnY));
 		}
 
-
-		private static void OnEnemyDie ()
-		{
-            //when an enemy dies checks to see if there is any left
-			if(enemyList.Count <= 0)
-			{
-                //if there is no enemies left spawn 4 more
-				SpawnEnemies();
-			}
-		}
-
-
+		// Spawns in enemies into map pseudo-randomly
 		public static void SpawnEnemies ()
 		{
             //spawns 2 melee enemies on the map randomly
@@ -69,5 +63,21 @@ namespace Runesole
 				enemy.OnDeath += () => Player.main.AddExp(2f); ///when the enemy dies give player exp
 			}
         }
+
+
+
+		// ## PRIVATE UTILITY METHOD ##
+
+		// called for every enemy killed in enemyList
+		private static void OnEnemyDie()
+		{
+			//when an enemy dies checks to see if there is any left
+			if (enemyList.Count <= 0)
+			{
+				//if there is no enemies left spawn 4 more
+				SpawnEnemies();
+			}
+		}
+
 	}
 }

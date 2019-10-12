@@ -13,13 +13,20 @@ using System.Threading.Tasks;
 
 namespace Runesole.Engine
 {
-	abstract class YieldInstruction
+	// ## PARENT ABSTRACT CLASS ##
+	
+	// A YieldInstruction class
+	abstract class YieldInstruction /// this could also be an interface (IYieldInstruction) - I followed Unity's style
 	{
 		// ## ABSTRACT MEMBERS ## // what the child needs to implement
 		public abstract bool keepWaiting { get; }
 	}
 
 
+
+	// ## CHILD CLASSES (YIELD INSTRUCTION IMPLEMENTATIONS) ##
+
+	// Waits while a condition becomes true
 	class WaitWhile : YieldInstruction
 	{
 		private Func<bool> predicate;
@@ -36,6 +43,7 @@ namespace Runesole.Engine
 		}
 	}
 
+	// Waits until a condition becomes true
 	class WaitUntil : YieldInstruction
 	{
 		private Func<bool> predicate;
@@ -52,7 +60,7 @@ namespace Runesole.Engine
 		}
 	}
 
-
+	// Waits for a given amount of in game time 
 	class WaitForSeconds : YieldInstruction
 	{
 		private float targetTime;
@@ -69,6 +77,7 @@ namespace Runesole.Engine
 		}
 	}
 
+	// Waits for a given amount of real time 
 	class WaitForSecondsRealtime : YieldInstruction
 	{
 		private float targetTime;

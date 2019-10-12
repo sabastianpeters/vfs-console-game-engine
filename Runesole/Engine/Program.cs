@@ -20,10 +20,12 @@ using Runesole.Engine.Graphics;
 
 namespace Runesole.Engine
 {
-
+	// Main program
 	static class Program
 	{
 
+		public static bool mainLoopStarted = false;
+		
 		[STAThread] /// required to read user input multiple keys at a time
 		static void Main(string[] args)
 		{
@@ -48,7 +50,9 @@ namespace Runesole.Engine
 			WorldBlock.Init();                  /// generates world blocks
 			GameManager.Start();				/// starts the game logic
 			GameObject.__CallStartEvent();      /// calls start event on all gameobjects
-			Console.Clear();					/// clears the screen once everything is loaded
+			Console.Clear();                    /// clears the screen once everything is loaded
+
+			mainLoopStarted = true;		/// sets main loop started "flag" to true
 
 			// while loop for each frame
 			while (true)
@@ -62,7 +66,6 @@ namespace Runesole.Engine
 				GameObject.__CallUpdateEvent();					/// Preforms game logic on gameobjects
 				GameManager.Update();                           /// updates game logic
 				CoroutineManager.Update();						/// updates coroutine logic
-				GameManager.camera.Update();					///	updates camera
 				GameManager.world.Draw(GameManager.camera);		/// draws the world
 				GameObject.__DrawGameObjects(GameManager.camera);	/// draws game objects
 				UI.Draw();										///	draws UI
@@ -76,29 +79,6 @@ namespace Runesole.Engine
 				// Add and destroy any gameobjects at end of frame
 				GameObject.__AddGameObjects();      
 				GameObject.__DestroyGameObjects();
-			}
-
-		}
-
-		static System.Collections.IEnumerator SimpleCoroutine ()
-		{
-			yield return null;
-			
-			bool toggled = true;
-
-			while(true)
-			{
-				float timeStarted = Time.time;
-				while (Time.time < timeStarted + 1)
-				{
-					yield return null;
-				}
-
-
-				UI.StringLeft(Coord.BottomLeft, "HEY: "+toggled.ToString());
-
-
-				toggled = !toggled;
 			}
 		}
 	}

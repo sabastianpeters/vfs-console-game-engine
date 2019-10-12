@@ -92,7 +92,7 @@
     <Compile Include="SpriteManager.cs" />
     <Compile Include="Engine\Time.cs" />
     <Compile Include="Engine\Graphics\UI.cs" />
-    <Compile Include="Engine\Vectors.cs" />
+    <Compile Include="Engine\Vector2.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>
   <ItemGroup>

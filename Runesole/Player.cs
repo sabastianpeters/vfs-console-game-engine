@@ -152,5 +152,18 @@ namespace Runesole
             attackDmg += 1;
             base.moveSpeed += 0.02f;
         }
-    }
+
+
+
+		public override void TakeDamage(float damage)
+		{
+			health -= damage;
+
+			//if the health of any entity is lower then 1, delete the entity 
+			if (health < 1f)
+			{
+				IsDead = true;
+			}
+		}
+	}
 }

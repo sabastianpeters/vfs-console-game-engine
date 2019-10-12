@@ -7,28 +7,33 @@ using Runesole.Engine;
 
 namespace Runesole
 {
+	// A living entity gameobject (health, speed, damage)
 	class LivingEntitiy : GameObject
 	{
+
+		// ## PUBLIC MEMBERS ##
 		public float health = 1;
 		public float maxHealth = 1;
 		public float attackDmg = 1;
 		public float moveSpeed = 1;
 		public float attackRange = 1;
 
-		public event Action OnDeath;
-		public bool IsDead { get; private set; }
+		public event Action OnDeath;	/// event called when entity diess
+		public bool IsDead { get; protected set; } /// is entity currently dead?
 
+		// attacks a target if they are in range of our attack range
 		public virtual void Attack(LivingEntitiy target)
 		{
-			// if the target is in range of our attack range, attack them
 			if(target.IsInRange(position, attackRange))
 				target.TakeDamage(attackDmg);
 
 		}
+
+		//set health to maxiumium health
 		public virtual void ResetHealth()
 		{
-            //set health to maxiumium health
             health = maxHealth;
+			IsDead = false;
 		}
 
 		public virtual void TakeDamage(float damage)

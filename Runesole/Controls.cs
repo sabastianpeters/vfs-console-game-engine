@@ -11,7 +11,8 @@ using System.Windows.Input;
 
 namespace Runesole
 {
-	static class Controls
+	// A Utility Contols Class
+	static class Controls	/// this allows for custom key mapping to be implemented later
 	{
 		public static Key moveLeft = Key.A; //sets A to left move
 		public static Key moveRight = Key.D; //sets D to right move
@@ -19,9 +20,7 @@ namespace Runesole
         public static Key moveDown = Key.S; //sets S to down move
 
         public static Key attack = Key.Up; //sets Up to attack
-
-		public static Key navUp = Key.Escape;
-		public static Key navDown = Key.Escape;
-		public static Key pauseGame = Key.Escape;
+		
+		public static Key respawnPlayer = Key.P;
 	}
 }
