@@ -48,14 +48,14 @@ namespace Runesole
 			enemy_melee.SetSpit(0, 0, new Spit(' ', Color.Background.Yellow)); /// head
 
             enemy_melee_damaged = new Sprite(1, 2);
-            enemy_melee_damaged.SetSpit(0, 0, new Spit('/', Color.Forground.Red, Color.Background.Yellow)); /// head
+            enemy_melee_damaged.SetSpit(0, 0, new Spit('/', Color.Foreground.Red, Color.Background.Yellow)); /// head
 
             // Ranged Enemy Sprites
             enemy_ranged = new Sprite(1, 1);
             enemy_ranged.SetSpit(0, 0, new Spit(' ', Color.Background.Magenta)); /// head
 
             enemy_ranged_damaged = new Sprite(1, 2);
-            enemy_ranged_damaged.SetSpit(0, 0, new Spit('/', Color.Forground.Red, Color.Background.Magenta)); /// head
+            enemy_ranged_damaged.SetSpit(0, 0, new Spit('/', Color.Foreground.Red, Color.Background.Magenta)); /// head
 
         }
     }

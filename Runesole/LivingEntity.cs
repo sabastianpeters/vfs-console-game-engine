@@ -57,10 +57,10 @@ namespace Runesole
                 ResetHealth();
             }
 		}
-
+        
+        // returns if the position is within the range of the entity
 		public virtual bool IsInRange(Vector2 v, float range)
 		{
-            //return if the position is within the range of the entity
             return Vector2.SqrDistance(v, position) < range * range;
 		}
 

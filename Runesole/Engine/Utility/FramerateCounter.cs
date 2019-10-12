@@ -21,7 +21,7 @@ namespace Runesole.Engine
 		// should call this every frame
 		public void Update ()
 		{
-			float _currentFps = 1 / Time.deltaTime; /// what would our fps be if we were running at this ms consistently?
+			float _currentFps = 1 / Time.unscaledDeltaTime; /// what would our fps be if we were running at this ms consistently?
 
 			// adds current fps this frame, unless infinity (then add 0)
 			_datapointList.Add(float.IsPositiveInfinity(_currentFps) || float.IsNegativeInfinity(_currentFps) ? 0 : _currentFps);

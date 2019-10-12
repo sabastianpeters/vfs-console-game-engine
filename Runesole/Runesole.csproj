@@ -65,6 +65,8 @@
     <Compile Include="Engine\Bounds.cs" />
     <Compile Include="Engine\Camera.cs" />
     <Compile Include="Controls.cs" />
+    <Compile Include="Engine\Coroutine.cs" />
+    <Compile Include="Engine\CoroutineManager.cs" />
     <Compile Include="Engine\Debug.cs" />
     <Compile Include="Engine\Graphics\Coord.cs" />
     <Compile Include="Engine\Graphics\Colors.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Engine\Input.cs" />
     <Compile Include="Engine\Mathf.cs" />
     <Compile Include="Engine\Utility\NativeFunctions.cs" />
+    <Compile Include="Engine\YieldInstructions.cs" />
     <Compile Include="LivingEntity.cs" />
     <Compile Include="MeleeEnemy.cs" />
     <Compile Include="PlayerUI.cs" />
